@@ -1,4 +1,5 @@
 import React from 'react';
+import './Header.css';
 
 const Header = () => {
     return (
@@ -37,12 +38,12 @@ const Header = () => {
                                 <div className='header-controls-pics'>
                                     <div
                                         data-id='search-expander'
-                                        className='header-controls-pic header-controls-search'>
-                                        dd
-                                    </div>
+                                        className='header-controls-pic header-controls-search'
+                                    />
+
                                     <div className='header-controls-pic header-controls-cart'>
-                                        <div className='header-controls-cart-full'>1</div>
-                                        <div className='header-controls-cart-menu'>dd</div>
+                                        <div className='header-controls-cart-full'></div>
+                                        <div className='header-controls-cart-menu'></div>
                                     </div>
                                 </div>
                                 <form

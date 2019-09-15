@@ -96,7 +96,7 @@ section {
   box-shadow: none;
 }
 
-/* Banner */
+/* Content */
 .banner {
   position: relative;
 }
@@ -118,7 +118,7 @@ section {
 
 /* Preloader */
 .preloader {
-  margin: 10px auto;  
+  margin: 10px auto;
   position: relative;
   width: 30px;
   height: 30px;
@@ -354,7 +354,7 @@ section {
   box-shadow: none;
 }
 
-/* Banner */
+/* Content */
 .banner {
   position: relative;
 }
@@ -376,7 +376,7 @@ section {
 
 /* Preloader */
 .preloader {
-  margin: 10px auto;  
+  margin: 10px auto;
   position: relative;
   width: 30px;
   height: 30px;
