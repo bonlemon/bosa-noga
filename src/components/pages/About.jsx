@@ -1,6 +1,6 @@
 import React from 'react';
 
-const NotFound = () => {
-    return <div className='NotFound'></div>;
+const About = () => {
+    return <div className='About'>About</div>;
 };
-export default NotFound;
+export default About;
