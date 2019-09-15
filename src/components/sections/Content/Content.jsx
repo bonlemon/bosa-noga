@@ -14,7 +14,7 @@ const Content = ({ children }) => {
         </main>
     );
 };
-Content.prototype = {
+Content.propTypes = {
     children: propTypes.node,
 };
 export default Content;

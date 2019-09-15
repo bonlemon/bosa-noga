@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import nanoid from 'nanoid';
 import './Header.css';
+import { Links } from '../../core';
 
 const Header = () => {
     const links = [
@@ -21,15 +21,7 @@ const Header = () => {
 
                         <div className='collapase navbar-collapse' id='navbarMain'>
                             <ul className='navbar-nav mr-auto'>
-                                {links.map(({ key, href, title }) => {
-                                    return (
-                                        <li key={key} className='nav-item'>
-                                            <Link className='nav-link' to={href}>
-                                                {title}
-                                            </Link>
-                                        </li>
-                                    );
-                                })}
+                                <Links links={links} />
                             </ul>
                             <div>
                                 <div className='header-controls-pics'>

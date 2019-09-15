@@ -1,7 +1,14 @@
 import React from 'react';
 import './Footer.css';
+import { Links } from '../../core';
+import nanoid from 'nanoid';
 
 const Footer = () => {
+    const links = [
+        { key: nanoid(), title: 'О магазине', href: '/about' },
+        { key: nanoid(), title: 'Каталог', href: '/catalog' },
+        { key: nanoid(), title: 'Контакты', href: '/contacts' },
+    ];
     return (
         <footer className='container bg-light footer'>
             <div className='row'>
@@ -9,21 +16,7 @@ const Footer = () => {
                     <section>
                         <h5>Информация</h5>
                         <ul className='nav flex-column'>
-                            <li className='nav-item'>
-                                <a href='/about.html' className='nav-link'>
-                                    О магазине
-                                </a>
-                            </li>
-                            <li className='nav-item'>
-                                <a href='/catalog.html' className='nav-link'>
-                                    Каталог
-                                </a>
-                            </li>
-                            <li className='nav-item'>
-                                <a href='/contacts.html' className='nav-link'>
-                                    Контакты
-                                </a>
-                            </li>
+                            <Links links={links} />
                         </ul>
                     </section>
                 </div>
