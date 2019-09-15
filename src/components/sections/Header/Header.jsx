@@ -1,7 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import nanoid from 'nanoid';
 import './Header.css';
 
 const Header = () => {
+    const links = [
+        { key: nanoid(), title: 'Главная', href: '/' },
+        { key: nanoid(), title: 'Каталог', href: '/catalog' },
+        { key: nanoid(), title: 'О магазине', href: '/about' },
+        { key: nanoid(), title: 'Контакты', href: '/contacts' },
+    ];
     return (
         <header className='container'>
             <div className='row'>
@@ -13,26 +21,15 @@ const Header = () => {
 
                         <div className='collapase navbar-collapse' id='navbarMain'>
                             <ul className='navbar-nav mr-auto'>
-                                <li className='nav-item'>
-                                    <a className='nav-link' href='/'>
-                                        Главная
-                                    </a>
-                                </li>
-                                <li className='nav-item'>
-                                    <a className='nav-link' href='/catalog.html'>
-                                        Каталог
-                                    </a>
-                                </li>
-                                <li className='nav-item active'>
-                                    <a className='nav-link' href='/about.html'>
-                                        О магазине
-                                    </a>
-                                </li>
-                                <li className='nav-item'>
-                                    <a className='nav-link' href='/contacts.html'>
-                                        Контакты
-                                    </a>
-                                </li>
+                                {links.map(({ key, href, title }) => {
+                                    return (
+                                        <li key={key} className='nav-item'>
+                                            <Link className='nav-link' to={href}>
+                                                {title}
+                                            </Link>
+                                        </li>
+                                    );
+                                })}
                             </ul>
                             <div>
                                 <div className='header-controls-pics'>
