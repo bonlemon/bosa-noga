@@ -3,29 +3,25 @@ import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 
 import { Header, Content, Footer } from './sections';
 import { Main, Catalog, About, Contacts, NotFound } from './pages';
-import { Provider } from 'react-redux';
-import store from '../store';
 
 const App = () => {
     return (
-        <Provider store={store}>
+        <div className='App'>
             <BrowserRouter>
-                <div className='App'>
-                    <Header />
-                    <Content>
-                        <Switch>
-                            <Route path='/' exact component={Main} />
-                            <Route path='/catalog' exact component={Catalog} />
-                            <Route path='/about' exact component={About} />
-                            <Route path='/contacts' exact component={Contacts} />
-                            <Route path='/404' exact component={NotFound} />
-                            <Redirect to='/404' />
-                        </Switch>
-                    </Content>
-                    <Footer />
-                </div>
+                <Header />
+                <Content>
+                    <Switch>
+                        <Route path='/' exact component={Main} />
+                        <Route path='/catalog' exact component={Catalog} />
+                        <Route path='/about' exact component={About} />
+                        <Route path='/contacts' exact component={Contacts} />
+                        <Route path='/404' exact component={NotFound} />
+                        <Redirect to='/404' />
+                    </Switch>
+                </Content>
+                <Footer />
             </BrowserRouter>
-        </Provider>
+        </div>
     );
 };
 export default App;
