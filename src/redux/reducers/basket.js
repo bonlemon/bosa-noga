@@ -5,7 +5,7 @@ import {
     ORDER_LOADING,
     ORDER_SUCCESS,
     ORDER_FAILURE,
-} from 'src/redux/constants';
+} from '../constants';
 
 const INITIAL_STATE = {
     owner: {

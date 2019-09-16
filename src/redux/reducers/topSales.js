@@ -1,4 +1,4 @@
-import { FETCH_TOP_SALES_LOADING, FETCH_TOP_SALES_SUCCESS, FETCH_TOP_SALES_FAILURE } from 'src/redux/constants';
+import { FETCH_TOP_SALES_LOADING, FETCH_TOP_SALES_SUCCESS, FETCH_TOP_SALES_FAILURE } from '../constants';
 
 const INITIAL_STATE = {
     list: [],

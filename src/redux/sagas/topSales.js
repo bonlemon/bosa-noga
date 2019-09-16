@@ -1,6 +1,6 @@
 import { takeEvery, put } from 'redux-saga/effects';
-import { fetchTopSalesSuccess, fetchTopSalesFailure } from 'src/redux/actions';
-import { FETCH_TOP_SALES_LOADING } from 'src/redux/constants';
+import { fetchTopSalesSuccess, fetchTopSalesFailure } from '../actions';
+import { FETCH_TOP_SALES_LOADING } from '../constants';
 
 function* fetchTopSales(action) {
     try {
