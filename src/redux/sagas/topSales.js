@@ -4,6 +4,11 @@ import { FETCH_TOP_SALES_LOADING } from '../constants';
 
 function* fetchTopSales(action) {
     try {
+        fetch('http://localhost:7070/api/top-sales')
+            .then((response) => response.json())
+            .then((data) => console.log(data))
+            .catch((error) => console.log(error));
+
         yield put(fetchTopSalesSuccess());
     } catch (e) {
         yield put(fetchTopSalesFailure(e.message));
