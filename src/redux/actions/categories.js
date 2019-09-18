@@ -5,11 +5,11 @@ export const fetchCategoriesLoading = () => {
         type: FETCH_CATEGORIES_LOADING,
     };
 };
-export const fetchCategoriesSuccess = (items) => {
+export const fetchCategoriesSuccess = (list) => {
     return {
         type: FETCH_CATEGORIES_SUCCESS,
         payload: {
-            items,
+            list,
         },
     };
 };

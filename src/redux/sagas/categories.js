@@ -2,14 +2,11 @@ import { takeEvery, put } from 'redux-saga/effects';
 import { fetchCategoriesSuccess, fetchCategoriesFailure } from '../actions';
 import { FETCH_CATEGORIES_LOADING } from '../constants';
 
-function* fetchCategories(action) {
+function* fetchCategories() {
     try {
-        fetch('http://localhost:7070/api/categories')
-            .then((response) => response.json())
-            .then((data) => console.log(data))
-            .catch((error) => console.log(error));
-
-        yield put(fetchCategoriesSuccess());
+        const response = yield fetch('http://localhost:7070/api/categories');
+        const data = yield response.json();
+        yield put(fetchCategoriesSuccess(data));
     } catch (e) {
         yield put(fetchCategoriesFailure(e.message));
     }

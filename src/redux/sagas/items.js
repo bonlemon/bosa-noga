@@ -1,16 +1,21 @@
 import { takeEvery, put } from 'redux-saga/effects';
-import { fetchItemsSuccess, fetchItemsFailure } from '../actions';
+import { fetchItemsSuccess, fetchItemsFailure, fetchCategoriesSuccess } from '../actions';
 import { FETCH_ITEMS_LOADING } from '../constants';
 
 function* fetchItems({ payload }) {
     try {
-        const { id, categoryId, offset } = payload;
-        fetch('http://localhost:7070/api/items', { id })
-            .then((response) => response.json())
-            .then((data) => console.log(data))
-            .catch((error) => console.log(error));
+        let url = 'http://localhost:7070/api/items';
 
-        yield put(fetchItemsSuccess());
+        if (Object.keys(payload).length) {
+            url += '?';
+            Object.keys(payload).forEach((key) => {
+                url += payload[key] ? `${key}=${payload[key]}&` : '';
+            });
+        }
+
+        const response = yield fetch(url);
+        const data = yield response.json();
+        yield put(fetchItemsSuccess(data));
     } catch (e) {
         yield put(fetchItemsFailure(e.message));
     }

@@ -9,7 +9,8 @@ class MainContainer extends Component {
 
         fetchTopSalesLoading();
         fetchCategoriesLoading();
-        fetchItemsLoading({ id: 123 });
+        // fetchItemsLoading({ id: 123, categoryId: 2, offset: 6 });
+        fetchItemsLoading();
     }
 
     render() {

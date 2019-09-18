@@ -2,14 +2,11 @@ import { takeEvery, put } from 'redux-saga/effects';
 import { fetchTopSalesSuccess, fetchTopSalesFailure } from '../actions';
 import { FETCH_TOP_SALES_LOADING } from '../constants';
 
-function* fetchTopSales(action) {
+function* fetchTopSales() {
     try {
-        fetch('http://localhost:7070/api/top-sales')
-            .then((response) => response.json())
-            .then((data) => console.log(data))
-            .catch((error) => console.log(error));
-
-        yield put(fetchTopSalesSuccess());
+        const response = yield fetch('http://localhost:7070/api/top-sales');
+        const data = yield response.json();
+        yield put(fetchTopSalesSuccess(data));
     } catch (e) {
         yield put(fetchTopSalesFailure(e.message));
     }

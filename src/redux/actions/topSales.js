@@ -5,11 +5,11 @@ export const fetchTopSalesLoading = () => {
         type: FETCH_TOP_SALES_LOADING,
     };
 };
-export const fetchTopSalesSuccess = (items) => {
+export const fetchTopSalesSuccess = (list) => {
     return {
         type: FETCH_TOP_SALES_SUCCESS,
         payload: {
-            items,
+            list,
         },
     };
 };

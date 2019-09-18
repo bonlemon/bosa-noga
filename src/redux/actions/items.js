@@ -8,11 +8,11 @@ export const fetchItemsLoading = (params) => {
         },
     };
 };
-export const fetchItemsSuccess = (items) => {
+export const fetchItemsSuccess = (list) => {
     return {
         type: FETCH_ITEMS_SUCCESS,
         payload: {
-            items,
+            list,
         },
     };
 };
