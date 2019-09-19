@@ -6,7 +6,7 @@ function* fetchCategories() {
     try {
         const response = yield fetch('http://localhost:7070/api/categories');
         const data = yield response.json();
-        yield put(fetchCategoriesSuccess(data));
+        yield put(fetchCategoriesSuccess([...data, { id: 0, title: 'Все' }]));
     } catch (e) {
         yield put(fetchCategoriesFailure(e.message));
     }
