@@ -1,6 +1,16 @@
 import { fetchCategoriesLoading, fetchCategoriesSuccess, fetchCategoriesFailure } from './categories';
 import { fetchTopSalesLoading, fetchTopSalesSuccess, fetchTopSalesFailure } from './topSales';
-import { fetchItemsLoading, fetchItemsSuccess, fetchItemsFailure } from './items';
+import {
+    fetchItemsLoading,
+    fetchItemsSuccess,
+    fetchItemsFailure,
+    fetchMoreItemsLoading,
+    fetchMoreItemsSuccess,
+    fetchMoreItemsFailure,
+    fetchItemsByIdLoading,
+    fetchItemsByIdSuccess,
+    fetchItemsByIdFailure,
+} from './items';
 
 export {
     fetchTopSalesLoading,
@@ -12,4 +22,10 @@ export {
     fetchItemsLoading,
     fetchItemsSuccess,
     fetchItemsFailure,
+    fetchMoreItemsLoading,
+    fetchMoreItemsSuccess,
+    fetchMoreItemsFailure,
+    fetchItemsByIdLoading,
+    fetchItemsByIdSuccess,
+    fetchItemsByIdFailure,
 };

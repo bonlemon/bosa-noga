@@ -28,6 +28,7 @@
 .preloader :last-child {
     background: #727e86;
 }
+
 @keyframes spin {
     0%,
     100% {

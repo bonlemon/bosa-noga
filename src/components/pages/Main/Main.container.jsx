@@ -1,20 +1,24 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { fetchTopSalesLoading, fetchCategoriesLoading, fetchItemsLoading } from '../../../redux/actions';
-import Main from './Main';
+import { TopSalesWidget, CatalogWidget } from '../../widgets';
 
 class MainContainer extends Component {
     componentDidMount() {
-        const { fetchTopSalesLoading, fetchCategoriesLoading, fetchItemsLoading } = this.props;
+        const { fetchTopSales, fetchCategories, fetchItems } = this.props;
 
-        fetchTopSalesLoading();
-        fetchCategoriesLoading();
-        // fetchItemsLoading({ id: 123, categoryId: 2, offset: 6 });
-        fetchItemsLoading();
+        fetchTopSales();
+        fetchCategories();
+        fetchItems();
     }
 
     render() {
-        return <Main />;
+        return (
+            <Fragment>
+                <TopSalesWidget />
+                <CatalogWidget />
+            </Fragment>
+        );
     }
 }
 function mapStateToProps(state) {
@@ -22,9 +26,9 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
     return {
-        fetchTopSalesLoading: () => dispatch(fetchTopSalesLoading()),
-        fetchCategoriesLoading: () => dispatch(fetchCategoriesLoading()),
-        fetchItemsLoading: (params) => dispatch(fetchItemsLoading(params)),
+        fetchTopSales: () => dispatch(fetchTopSalesLoading()),
+        fetchCategories: () => dispatch(fetchCategoriesLoading()),
+        fetchItems: (params) => dispatch(fetchItemsLoading(params)),
     };
 }
 
