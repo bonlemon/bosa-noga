@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Card } from '../../core';
 import Categories from './Categories';
 
@@ -9,7 +9,7 @@ const Catalog = ({ items, onClickMore }) => {
             <Categories />
             <div className='row'>
                 {items.map(({ id, title, price, images }) => {
-                    return <Card key={id} {...{ id, title, price, image: images[0] }} />;
+                    return <Card key={id} className='divider' {...{ id, title, price, image: images[0] }} />;
                 })}
             </div>
             <div className='text-center'>

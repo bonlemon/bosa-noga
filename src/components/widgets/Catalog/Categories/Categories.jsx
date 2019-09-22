@@ -1,4 +1,5 @@
 import React from 'react';
+import './Category.css';
 
 const Categories = ({ categories, categoryId, onClickCategory }) => {
     return (

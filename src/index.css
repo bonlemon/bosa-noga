@@ -26,6 +26,20 @@ section {
   margin-bottom: 2em;
 }
 
+img {
+  vertical-align: middle;
+  border-style: none;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+section {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
 .img-fluid {
   max-width: 100%;
   height: auto;
@@ -54,15 +68,6 @@ section {
   margin-bottom: 1em;
 }
 
-
-a:hover {
-  cursor: pointer;
-}
-
-section {
-  margin-top: 2em;
-  margin-bottom: 2em;
-}
 
 /* Common Styles */
 .invisible {
@@ -153,4 +158,8 @@ h2, .h2 {
 .btn-outline-primary:hover {
   background-color: #727e86;
   border-color: #727e86;
+}
+
+.divider {
+  margin-bottom: 1rem;
 }
