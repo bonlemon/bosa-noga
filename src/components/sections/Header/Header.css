@@ -61,3 +61,7 @@
     outline: none;
     box-shadow: none;
 }
+
+.invisible {
+    opacity: 0;
+}

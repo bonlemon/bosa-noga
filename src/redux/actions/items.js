@@ -8,6 +8,7 @@ import {
     FETCH_ITEMS_BY_ID_LOADING,
     FETCH_ITEMS_BY_ID_SUCCESS,
     FETCH_ITEMS_BY_ID_FAILURE,
+    CHANGE_QUERY_TEXT,
 } from '../constants';
 
 // export const fetchItems = (type = 'loading') => (params) => {
@@ -23,6 +24,15 @@ import {
 //         },
 //     };
 // };
+
+export const changeQueryText = ({ queryText }) => {
+    return {
+        type: CHANGE_QUERY_TEXT,
+        payload: {
+            queryText,
+        },
+    };
+};
 
 export const fetchItemsLoading = (params) => {
     return {

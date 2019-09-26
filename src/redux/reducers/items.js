@@ -5,11 +5,13 @@ import {
     FETCH_MORE_ITEMS_SUCCESS,
     FETCH_MORE_ITEMS_FAILURE,
     FETCH_MORE_ITEMS_LOADING,
+    CHANGE_QUERY_TEXT,
 } from '../constants';
 
 const INITIAL_STATE = {
     list: [],
     categoryId: 0,
+    queryText: '',
     isLoading: false,
     error: null,
 };
@@ -66,6 +68,13 @@ export default (state = INITIAL_STATE, action) => {
             };
         }
 
+        case CHANGE_QUERY_TEXT: {
+            return {
+                ...state,
+                queryText: action.payload.queryText,
+            };
+        }
+
         default:
             return state;
     }
@@ -75,3 +84,4 @@ export const getItems = (state) => state.items.list;
 export const getItemsIsLoading = (state) => state.items.isLoading;
 export const getItemsErrors = (state) => state.items.error;
 export const getSelectedCategoryId = (state) => state.items.categoryId;
+export const getItemsQueryText = (state) => state.items.queryText;

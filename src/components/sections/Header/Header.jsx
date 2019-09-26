@@ -1,15 +1,23 @@
 import React from 'react';
 import nanoid from 'nanoid';
+import classNames from 'classnames';
 import './Header.css';
 import { Links } from '../../core';
 
-const Header = () => {
+const Header = ({ amountInBasket, isVisible, onSubmit, onChange, onToggleForm }) => {
     const links = [
         { key: nanoid(), title: 'Главная', href: '/' },
         { key: nanoid(), title: 'Каталог', href: '/catalog' },
         { key: nanoid(), title: 'О магазине', href: '/about' },
         { key: nanoid(), title: 'Контакты', href: '/contacts' },
     ];
+
+    const formClassName = classNames({
+        'header-controls-search-form': true,
+        'form-inline ': true,
+        invisible: !isVisible,
+    });
+
     return (
         <header className='container'>
             <div className='row'>
@@ -26,19 +34,20 @@ const Header = () => {
                             <div>
                                 <div className='header-controls-pics'>
                                     <div
+                                        onClick={onToggleForm}
                                         data-id='search-expander'
                                         className='header-controls-pic header-controls-search'
                                     />
 
                                     <div className='header-controls-pic header-controls-cart'>
-                                        <div className='header-controls-cart-full'></div>
+                                        {amountInBasket ? (
+                                            <div className='header-controls-cart-full'>{amountInBasket}</div>
+                                        ) : null}
                                         <div className='header-controls-cart-menu'></div>
                                     </div>
                                 </div>
-                                <form
-                                    data-id='search-form'
-                                    className='header-controls-search-form form-inline invisible'>
-                                    <input className='form-control' placeholder='Поиск' />
+                                <form onSubmit={onSubmit} data-id='search-form' className={formClassName}>
+                                    <input className='form-control' onChange={onChange} placeholder='Поиск' />
                                 </form>
                             </div>
                         </div>
