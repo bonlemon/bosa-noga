@@ -1,22 +1,16 @@
 import React from 'react';
 import nanoid from 'nanoid';
-import classNames from 'classnames';
 import './Header.css';
 import { Links } from '../../core';
+import { SearchWidget } from '../../widgets';
 
-const Header = ({ amountInBasket, isVisible, onSubmit, onChange, onToggleForm }) => {
+const Header = ({ amountInBasket, isVisible, onToggleForm }) => {
     const links = [
         { key: nanoid(), title: 'Главная', href: '/' },
         { key: nanoid(), title: 'Каталог', href: '/catalog' },
         { key: nanoid(), title: 'О магазине', href: '/about' },
         { key: nanoid(), title: 'Контакты', href: '/contacts' },
     ];
-
-    const formClassName = classNames({
-        'header-controls-search-form': true,
-        'form-inline ': true,
-        invisible: !isVisible,
-    });
 
     return (
         <header className='container'>
@@ -43,12 +37,10 @@ const Header = ({ amountInBasket, isVisible, onSubmit, onChange, onToggleForm })
                                         {amountInBasket ? (
                                             <div className='header-controls-cart-full'>{amountInBasket}</div>
                                         ) : null}
-                                        <div className='header-controls-cart-menu'></div>
+                                        <div className='header-controls-cart-menu' />
                                     </div>
                                 </div>
-                                <form onSubmit={onSubmit} data-id='search-form' className={formClassName}>
-                                    <input className='form-control' onChange={onChange} placeholder='Поиск' />
-                                </form>
+                                <SearchWidget invisible={!isVisible} isHeader />
                             </div>
                         </div>
                     </nav>

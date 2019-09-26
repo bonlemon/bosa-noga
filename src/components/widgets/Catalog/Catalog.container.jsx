@@ -10,8 +10,12 @@ class CatalogContainer extends Component {
         this.props.onClickMore({ offset: 6 });
     };
     render() {
-        const { isLoading, items } = this.props;
-        return isLoading ? <Preloader /> : <Catalog items={items} onClickMore={this.handleOnClickMore} />;
+        const { isLoading, items, showSearchWidget } = this.props;
+        return isLoading ? (
+            <Preloader />
+        ) : (
+            <Catalog {...{ items, showSearchWidget }} onClickMore={this.handleOnClickMore} />
+        );
     }
 }
 function mapStateToProps(state) {

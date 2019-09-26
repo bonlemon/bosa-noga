@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { fetchTopSalesLoading, fetchCategoriesLoading, fetchItemsLoading } from '../../../redux/actions';
-import { TopSalesWidget, CatalogWidget } from '../../widgets';
+import { fetchItemsLoading } from '../../../redux/actions';
 import Header from './Header';
 import { getItemsQueryText } from '../../../redux/reducers/items';
 import { changeQueryText } from '../../../redux/actions/items';

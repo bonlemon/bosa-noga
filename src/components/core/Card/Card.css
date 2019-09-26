@@ -13,12 +13,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
-    height: 385px;
-}
-.card-img-top {
-    width: 300px;
-    background-size: auto;
+    height: auto;
+    max-width: 100%;
 }
 .card-body {
     flex: 1 1 auto;

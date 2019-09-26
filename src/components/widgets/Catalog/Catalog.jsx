@@ -1,11 +1,13 @@
 import React, { Fragment } from 'react';
 import { Card } from '../../core';
 import Categories from './Categories';
+import { SearchWidget } from '../index';
 
-const Catalog = ({ items, onClickMore }) => {
+const Catalog = ({ items, showSearchWidget, onClickMore }) => {
     return (
         <section className='catalog'>
             <h2 className='text-center'>Каталог</h2>
+            {showSearchWidget && <SearchWidget isCatalog />}
             <Categories />
             <div className='row'>
                 {items.map(({ id, title, price, images }) => {
