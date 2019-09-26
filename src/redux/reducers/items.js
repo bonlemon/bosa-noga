@@ -30,7 +30,7 @@ export default (state = INITIAL_STATE, action) => {
         case FETCH_ITEMS_SUCCESS: {
             return {
                 ...state,
-                list: action.payload.list,
+                list: [...action.payload.list],
                 isLoading: false,
                 error: null,
             };
@@ -46,7 +46,6 @@ export default (state = INITIAL_STATE, action) => {
         case FETCH_MORE_ITEMS_LOADING: {
             return {
                 ...state,
-                list: [],
                 isLoading: true,
                 error: null,
             };
@@ -62,7 +61,6 @@ export default (state = INITIAL_STATE, action) => {
         case FETCH_MORE_ITEMS_FAILURE: {
             return {
                 ...state,
-                list: [],
                 isLoading: false,
                 error: action.payload.error,
             };

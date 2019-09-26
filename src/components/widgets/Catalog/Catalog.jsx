@@ -1,7 +1,8 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Card } from '../../core';
 import Categories from './Categories';
 import { SearchWidget } from '../index';
+import * as nanoid from 'nanoid';
 
 const Catalog = ({ items, showSearchWidget, onClickMore }) => {
     return (
@@ -11,7 +12,7 @@ const Catalog = ({ items, showSearchWidget, onClickMore }) => {
             <Categories />
             <div className='row'>
                 {items.map(({ id, title, price, images }) => {
-                    return <Card key={id} className='divider' {...{ id, title, price, image: images[0] }} />;
+                    return <Card key={nanoid()} className='divider' {...{ id, title, price, image: images[0] }} />;
                 })}
             </div>
             <div className='text-center'>
