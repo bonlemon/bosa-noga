@@ -39,4 +39,4 @@ export default (state = INITIAL_STATE, action) => {
 
 export const categoriesSelector = (state) => state.categories.list;
 export const categoriesIsLoadingSelector = (state) => state.categories.isLoading;
-export const categoriesErrorSelector = (state) => state.categories.error;
+export const getCategoriesError = (state) => state.categories.error;

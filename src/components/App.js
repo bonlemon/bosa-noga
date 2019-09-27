@@ -5,6 +5,11 @@ import { Header, Content, Footer } from './sections';
 import { MainContainer, Catalog, About, Contacts, Product, NotFound } from './pages';
 import { fetchCategoriesLoading, fetchItemsLoading, fetchTopSalesLoading } from '../redux/actions';
 import { connect } from 'react-redux';
+import { getItemsErrors } from '../redux/reducers/items';
+import { getOrderError } from '../redux/reducers/basket';
+import { getTopSalesErrors } from '../redux/reducers/topSales';
+import { getCategoriesError } from '../redux/reducers/categories';
+import Modal from './core/Modal';
 
 class App extends Component {
     componentDidMount() {
@@ -16,6 +21,7 @@ class App extends Component {
     }
 
     render() {
+        const { errorMessage } = this.props;
         return (
             <div className='App'>
                 <BrowserRouter>
@@ -32,10 +38,23 @@ class App extends Component {
                         </Switch>
                     </Content>
                     <Footer />
+                    {errorMessage && <Modal errorMessage={errorMessage} />}
                 </BrowserRouter>
             </div>
         );
     }
+}
+
+function mapStateToProps(state) {
+    const items = getItemsErrors(state);
+    const order = getOrderError(state);
+    const topSales = getTopSalesErrors(state);
+    const categories = getCategoriesError(state);
+    const getErrorMessage = (slices) => slices.some((slice) => slice && slice.error);
+
+    return {
+        errorMessage: getErrorMessage([items, order, topSales, categories]),
+    };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -47,6 +66,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(App);

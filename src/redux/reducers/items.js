@@ -10,6 +10,7 @@ import {
 
 const INITIAL_STATE = {
     list: [],
+    productById: null,
     categoryId: 0,
     queryText: '',
     isLoading: false,
@@ -82,4 +83,5 @@ export const getItems = (state) => state.items.list;
 export const getItemsIsLoading = (state) => state.items.isLoading;
 export const getItemsErrors = (state) => state.items.error;
 export const getSelectedCategoryId = (state) => state.items.categoryId;
+export const getSelectedProductById = (state) => state.items.productById;
 export const getItemsQueryText = (state) => state.items.queryText;
