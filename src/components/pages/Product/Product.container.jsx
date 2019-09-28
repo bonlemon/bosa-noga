@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchMoreItemsLoading } from '../../../redux/actions';
+import { fetchItemsLoading } from '../../../redux/actions';
 import Product from './Product';
-import { getSelectedProductById } from '../../../redux/reducers/items';
+import { getItemsIsLoading, getSelectedProductById } from '../../../redux/reducers/items';
+import { Preloader } from '../../core';
 
 class ProductContainer extends Component {
+    state = {
+        amount: 1,
+        selected: null,
+    };
     componentDidMount() {
         const {
             fetchItems,
@@ -15,22 +20,46 @@ class ProductContainer extends Component {
 
         fetchItems({ id });
     }
+    handleOnChangeAmount = (operation) => () => {
+        this.setState(({ amount }) => {
+            if (operation === 'add') {
+                return { amount: amount + 1 };
+            } else {
+                if (amount === 0) {
+                    return { amount: 0 };
+                }
+                return { amount: amount - 1 };
+            }
+        });
+    };
+    handleOnChangeSelected = (seleced) => {
+        this.setState({ seleced });
+    };
 
     render() {
-        const { product } = this.props;
-        console.warn(product);
-        return <Product product={product} />;
+        const { isLoading, product } = this.props;
+        const { amount } = this.state;
+        return isLoading || !product ? (
+            <Preloader />
+        ) : (
+            <Product
+                amount={amount}
+                product={product}
+                onChangeSelected={this.handleOnChangeSelected}
+                onChangeAmount={this.handleOnChangeAmount}
+            />
+        );
     }
 }
 function mapStateToProps(state) {
     return {
-        isLoading: getSelectedProductById(state),
+        isLoading: getItemsIsLoading(state),
         product: getSelectedProductById(state),
     };
 }
 function mapDispatchToProps(dispatch) {
     return {
-        fetchItems: (params) => dispatch(fetchMoreItemsLoading(params)),
+        fetchItems: (params) => dispatch(fetchItemsLoading(params)),
     };
 }
 

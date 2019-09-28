@@ -1,9 +1,19 @@
 import { takeEvery, put } from 'redux-saga/effects';
-import { fetchItemsSuccess, fetchItemsFailure, fetchMoreItemsSuccess, fetchMoreItemsFailure } from '../actions';
-import { FETCH_ITEMS_LOADING, FETCH_MORE_ITEMS_LOADING } from '../constants';
+import {
+    fetchItemsSuccess,
+    fetchItemsFailure,
+    fetchMoreItemsSuccess,
+    fetchMoreItemsFailure,
+    fetchItemsLoading,
+    fetchMoreItemsLoading,
+} from '../actions';
 
 function getUrl(payload) {
     let url = 'http://localhost:7070/api/items';
+
+    if (payload.id) {
+        return `${url}/${payload.id}`;
+    }
 
     if (Object.keys(payload).length) {
         url += '?';
@@ -19,14 +29,16 @@ function* fetchItems({ payload }) {
         const url = getUrl(payload);
         const response = yield fetch(url);
         const data = yield response.json();
-        yield put(fetchItemsSuccess(data));
+        const list = Array.isArray(data) ? data : [];
+        const byId = Array.isArray(data) ? null : data;
+        yield put(fetchItemsSuccess({ list, byId }));
     } catch (e) {
-        yield put(fetchItemsFailure(e.message));
+        yield put(fetchItemsFailure({ error: e.message }));
     }
 }
 
 export function* watchFetchItems() {
-    yield takeEvery(FETCH_ITEMS_LOADING, fetchItems);
+    yield takeEvery(fetchItemsLoading().type, fetchItems);
 }
 
 function* fetchMoreItems({ payload }) {
@@ -35,12 +47,12 @@ function* fetchMoreItems({ payload }) {
 
         const response = yield fetch(url);
         const data = yield response.json();
-        yield put(fetchMoreItemsSuccess(data));
+        yield put(fetchMoreItemsSuccess({ list: data }));
     } catch (e) {
-        yield put(fetchMoreItemsFailure(e.message));
+        yield put(fetchMoreItemsFailure({ error: e.message }));
     }
 }
 
 export function* watchFetchMoreItems() {
-    yield takeEvery(FETCH_MORE_ITEMS_LOADING, fetchMoreItems);
+    yield takeEvery(fetchMoreItemsLoading().type, fetchMoreItems);
 }

@@ -7,9 +7,6 @@ import {
     fetchMoreItemsLoading,
     fetchMoreItemsSuccess,
     fetchMoreItemsFailure,
-    fetchItemsByIdLoading,
-    fetchItemsByIdSuccess,
-    fetchItemsByIdFailure,
 } from './items';
 
 export {
@@ -25,7 +22,4 @@ export {
     fetchMoreItemsLoading,
     fetchMoreItemsSuccess,
     fetchMoreItemsFailure,
-    fetchItemsByIdLoading,
-    fetchItemsByIdSuccess,
-    fetchItemsByIdFailure,
 };

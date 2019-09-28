@@ -1,29 +1,7 @@
-import {
-    FETCH_ITEMS_LOADING,
-    FETCH_ITEMS_SUCCESS,
-    FETCH_ITEMS_FAILURE,
-    FETCH_MORE_ITEMS_LOADING,
-    FETCH_MORE_ITEMS_SUCCESS,
-    FETCH_MORE_ITEMS_FAILURE,
-    FETCH_ITEMS_BY_ID_LOADING,
-    FETCH_ITEMS_BY_ID_SUCCESS,
-    FETCH_ITEMS_BY_ID_FAILURE,
-    CHANGE_QUERY_TEXT,
-} from '../constants';
+import { FETCH_ITEMS, FETCH_MORE_ITEMS, CHANGE_QUERY_TEXT } from '../constants';
+import { createAsyncActions } from './helpers';
 
-// export const fetchItems = (type = 'loading') => (params) => {
-//     const types = {
-//         loading: FETCH_ITEMS_LOADING,
-//         success: FETCH_ITEMS_LOADING,
-//         failure: FETCH_ITEMS_LOADING,
-//     };
-//     return {
-//         type: types[type],
-//         payload: {
-//             ...params,
-//         },
-//     };
-// };
+// Sync
 
 export const changeQueryText = ({ queryText }) => {
     return {
@@ -34,77 +12,10 @@ export const changeQueryText = ({ queryText }) => {
     };
 };
 
-export const fetchItemsLoading = (params) => {
-    return {
-        type: FETCH_ITEMS_LOADING,
-        payload: {
-            ...params,
-        },
-    };
-};
-export const fetchItemsSuccess = (list) => {
-    return {
-        type: FETCH_ITEMS_SUCCESS,
-        payload: {
-            list,
-        },
-    };
-};
-export const fetchItemsFailure = (error) => {
-    return {
-        type: FETCH_ITEMS_FAILURE,
-        payload: {
-            error,
-        },
-    };
-};
+// Async
 
-export const fetchMoreItemsLoading = (params) => {
-    return {
-        type: FETCH_MORE_ITEMS_LOADING,
-        payload: {
-            ...params,
-        },
-    };
-};
-export const fetchMoreItemsSuccess = (list) => {
-    return {
-        type: FETCH_MORE_ITEMS_SUCCESS,
-        payload: {
-            list,
-        },
-    };
-};
-export const fetchMoreItemsFailure = (error) => {
-    return {
-        type: FETCH_MORE_ITEMS_FAILURE,
-        payload: {
-            error,
-        },
-    };
-};
+export const { fetchItemsLoading, fetchItemsSuccess, fetchItemsFailure } = createAsyncActions(FETCH_ITEMS);
 
-export const fetchItemsByIdLoading = (params) => {
-    return {
-        type: FETCH_ITEMS_BY_ID_LOADING,
-        payload: {
-            ...params,
-        },
-    };
-};
-export const fetchItemsByIdSuccess = (list) => {
-    return {
-        type: FETCH_ITEMS_BY_ID_SUCCESS,
-        payload: {
-            list,
-        },
-    };
-};
-export const fetchItemsByIdFailure = (error) => {
-    return {
-        type: FETCH_ITEMS_BY_ID_FAILURE,
-        payload: {
-            error,
-        },
-    };
-};
+export const { fetchMoreItemsLoading, fetchMoreItemsSuccess, fetchMoreItemsFailure } = createAsyncActions(
+    FETCH_MORE_ITEMS
+);

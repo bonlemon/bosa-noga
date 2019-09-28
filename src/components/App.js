@@ -3,7 +3,7 @@ import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 
 import { Header, Content, Footer } from './sections';
 import { MainContainer, Catalog, About, Contacts, Product, NotFound } from './pages';
-import { fetchCategoriesLoading, fetchItemsLoading, fetchTopSalesLoading } from '../redux/actions';
+import { fetchCategoriesLoading } from '../redux/actions';
 import { connect } from 'react-redux';
 import { getItemsErrors } from '../redux/reducers/items';
 import { getOrderError } from '../redux/reducers/basket';
@@ -13,11 +13,9 @@ import Modal from './core/Modal';
 
 class App extends Component {
     componentDidMount() {
-        const { fetchTopSales, fetchCategories, fetchItems } = this.props;
+        const { fetchCategories } = this.props;
 
-        fetchTopSales();
         fetchCategories();
-        fetchItems();
     }
 
     render() {
@@ -59,9 +57,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        fetchTopSales: () => dispatch(fetchTopSalesLoading()),
         fetchCategories: () => dispatch(fetchCategoriesLoading()),
-        fetchItems: (params) => dispatch(fetchItemsLoading(params)),
     };
 }
 

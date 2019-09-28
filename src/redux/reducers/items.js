@@ -1,12 +1,12 @@
+import { CHANGE_QUERY_TEXT } from '../constants';
 import {
-    FETCH_ITEMS_LOADING,
-    FETCH_ITEMS_SUCCESS,
-    FETCH_ITEMS_FAILURE,
-    FETCH_MORE_ITEMS_SUCCESS,
-    FETCH_MORE_ITEMS_FAILURE,
-    FETCH_MORE_ITEMS_LOADING,
-    CHANGE_QUERY_TEXT,
-} from '../constants';
+    fetchItemsFailure,
+    fetchItemsLoading,
+    fetchItemsSuccess,
+    fetchMoreItemsFailure,
+    fetchMoreItemsLoading,
+    fetchMoreItemsSuccess,
+} from '../actions';
 
 const INITIAL_STATE = {
     list: [],
@@ -19,39 +19,40 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case FETCH_ITEMS_LOADING: {
+        case fetchItemsLoading().type: {
             return {
                 ...state,
                 list: [],
+                productById: null,
                 categoryId: action.payload.categoryId || 0,
                 isLoading: true,
                 error: null,
             };
         }
-        case FETCH_ITEMS_SUCCESS: {
+        case fetchItemsSuccess().type: {
             return {
                 ...state,
                 list: [...action.payload.list],
+                productById: action.payload.byId,
                 isLoading: false,
                 error: null,
             };
         }
-        case FETCH_ITEMS_FAILURE: {
+        case fetchItemsFailure().type: {
             return {
                 ...state,
-                list: [],
                 isLoading: false,
                 error: action.payload.error,
             };
         }
-        case FETCH_MORE_ITEMS_LOADING: {
+        case fetchMoreItemsLoading().type: {
             return {
                 ...state,
                 isLoading: true,
                 error: null,
             };
         }
-        case FETCH_MORE_ITEMS_SUCCESS: {
+        case fetchMoreItemsSuccess().type: {
             return {
                 ...state,
                 list: [...state.list, ...action.payload.list],
@@ -59,7 +60,7 @@ export default (state = INITIAL_STATE, action) => {
                 error: null,
             };
         }
-        case FETCH_MORE_ITEMS_FAILURE: {
+        case fetchMoreItemsFailure().type: {
             return {
                 ...state,
                 isLoading: false,
