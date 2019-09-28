@@ -7,9 +7,11 @@ import {
     fetchItemsLoading,
     fetchMoreItemsLoading,
 } from '../actions';
+import { SERVER_URL } from '../constants';
+import { makeOrderFailure, makeOrderLoading, makeOrderSuccess } from '../actions/items';
 
 function getUrl(payload) {
-    let url = 'http://localhost:7070/api/items';
+    let url = `${SERVER_URL}/items`;
 
     if (payload.id) {
         return `${url}/${payload.id}`;
@@ -24,7 +26,7 @@ function getUrl(payload) {
     return url;
 }
 
-function* fetchItems({ payload }) {
+function* fetchItemsWorker({ payload }) {
     try {
         const url = getUrl(payload);
         const response = yield fetch(url);
@@ -38,10 +40,10 @@ function* fetchItems({ payload }) {
 }
 
 export function* watchFetchItems() {
-    yield takeEvery(fetchItemsLoading().type, fetchItems);
+    yield takeEvery(fetchItemsLoading().type, fetchItemsWorker);
 }
 
-function* fetchMoreItems({ payload }) {
+function* fetchMoreItemsWorker({ payload }) {
     try {
         const url = getUrl(payload);
 
@@ -54,5 +56,20 @@ function* fetchMoreItems({ payload }) {
 }
 
 export function* watchFetchMoreItems() {
-    yield takeEvery(fetchMoreItemsLoading().type, fetchMoreItems);
+    yield takeEvery(fetchMoreItemsLoading().type, fetchMoreItemsWorker);
+}
+
+function* makeOrderWorker({ payload }) {
+    try {
+        const { owner, items } = payload;
+        const response = yield fetch(`${SERVER_URL}/order`, { method: 'POST', body: { owner, items } });
+        const data = yield response.json();
+        yield put(makeOrderSuccess());
+    } catch (e) {
+        yield put(makeOrderFailure({ error: e.message }));
+    }
+}
+
+export function* watchMakeOrder() {
+    yield takeEvery(makeOrderLoading().type, makeOrderWorker);
 }

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchItemsLoading } from '../../../redux/actions';
-import Product from './Product';
+import Basket from './Basket';
 import { getItemsIsLoading, getSelectedProductById } from '../../../redux/reducers/items';
 import { Preloader } from '../../core';
 
-class ProductContainer extends Component {
+class BasketContainer extends Component {
     state = {
         amount: 1,
         selected: null,
@@ -37,7 +37,7 @@ class ProductContainer extends Component {
     };
 
     handleOnGoInBasket = () => {
-        this.props.history.push('/basket');
+        this.props.history.push(/)
     };
     render() {
         const { isLoading, product } = this.props;
@@ -45,7 +45,7 @@ class ProductContainer extends Component {
         return isLoading || !product ? (
             <Preloader />
         ) : (
-            <Product
+            <Basket
                 amount={amount}
                 product={product}
                 onChangeSelected={this.handleOnChangeSelected}
@@ -70,4 +70,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ProductContainer);
+)(BasketContainer);
