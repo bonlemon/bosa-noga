@@ -5,6 +5,7 @@ import Header from './Header';
 import { getItemsQueryText } from '../../../redux/reducers/items';
 import { changeQueryText } from '../../../redux/actions/items';
 import { getBasketItems } from '../../../redux/reducers/basket';
+import { withRouter } from 'react-router-dom';
 
 class HeaderContainer extends Component {
     state = {
@@ -34,6 +35,9 @@ class HeaderContainer extends Component {
         const { onChangeText } = this.props;
         onChangeText({ queryText: e.target.value });
     };
+    handleOnClickGoToBasket = () => {
+        this.props.history.push('/basket');
+    };
 
     fetchCatalog = () => {
         const { queryText, fetchItems } = this.props;
@@ -43,6 +47,7 @@ class HeaderContainer extends Component {
     render() {
         const { isVisible } = this.state;
         const { amountInBasket } = this.props;
+
         return (
             <Header
                 isVisible={isVisible}
@@ -50,6 +55,7 @@ class HeaderContainer extends Component {
                 onSubmit={this.handleSubmit}
                 onChange={this.handleChange}
                 onToggleForm={this.handleToggleForm}
+                onClickGoToBasket={this.handleOnClickGoToBasket}
             />
         );
     }
@@ -67,7 +73,9 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(HeaderContainer);
+export default withRouter(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(HeaderContainer)
+);

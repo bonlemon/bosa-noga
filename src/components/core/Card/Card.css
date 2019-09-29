@@ -14,7 +14,7 @@
     justify-content: center;
     align-items: center;
     height: auto;
-    max-width: 100%;
+    width: 100%;
 }
 .card-body {
     flex: 1 1 auto;

@@ -8,7 +8,7 @@ const Card = ({ id, image, title, price, className }) => {
         <div className='col-4'>
             <div className={`card ${className || ''}`}>
                 <div className='card-img'>
-                    <img src={image} className='card-img-top img-fluid' alt={title} />
+                    <img src={image} className='card-img img-fluid' alt={title} />
                 </div>
                 <div className='card-body'>
                     <p className='card-text'>{title}</p>

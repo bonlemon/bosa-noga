@@ -4,6 +4,7 @@ import { fetchItemsLoading } from '../../../redux/actions';
 import Product from './Product';
 import { getItemsIsLoading, getSelectedProductById } from '../../../redux/reducers/items';
 import { Preloader } from '../../core';
+import { addProductIntoBasket } from '../../../redux/actions/basket';
 
 class ProductContainer extends Component {
     state = {
@@ -12,41 +13,43 @@ class ProductContainer extends Component {
     };
     componentDidMount() {
         const {
-            fetchItems,
+            onFetchItems,
             match: {
                 params: { id },
             },
         } = this.props;
 
-        fetchItems({ id });
+        onFetchItems({ id });
     }
     handleOnChangeAmount = (operation) => () => {
         this.setState(({ amount }) => {
             if (operation === 'add') {
-                return { amount: amount + 1 };
+                return { amount: Number(amount) + 1 };
             } else {
-                if (amount === 0) {
-                    return { amount: 0 };
-                }
-                return { amount: amount - 1 };
+                return { amount: Number(amount) - 1 };
             }
         });
     };
-    handleOnChangeSelected = (seleced) => {
-        this.setState({ seleced });
+    handleOnChangeSelected = (e) => {
+        this.setState({ selected: e.target.id });
     };
 
     handleOnGoInBasket = () => {
-        this.props.history.push('/basket');
+        const { history, product, onAddProductIntoBasket } = this.props;
+        const { amount } = this.state;
+
+        onAddProductIntoBasket({ product: { ...product, amount } });
+        history.push('/basket');
     };
     render() {
         const { isLoading, product } = this.props;
-        const { amount } = this.state;
+        const { amount, selected } = this.state;
         return isLoading || !product ? (
             <Preloader />
         ) : (
             <Product
                 amount={amount}
+                selected={selected}
                 product={product}
                 onChangeSelected={this.handleOnChangeSelected}
                 onChangeAmount={this.handleOnChangeAmount}
@@ -63,7 +66,8 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
     return {
-        fetchItems: (params) => dispatch(fetchItemsLoading(params)),
+        onFetchItems: (params) => dispatch(fetchItemsLoading(params)),
+        onAddProductIntoBasket: (params) => dispatch(addProductIntoBasket(params)),
     };
 }
 

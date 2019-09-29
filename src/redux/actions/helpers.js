@@ -1,6 +1,6 @@
 import { toCamelCase } from '../../utils';
 
-function getActionCreator(type) {
+export function getActionCreator(type) {
     return (params) => {
         return {
             type: type,

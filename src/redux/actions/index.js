@@ -9,7 +9,13 @@ import {
     fetchMoreItemsFailure,
 } from './items';
 
+import { addProductIntoBasket, removeProductIntoBasket, editOwner, initialBasket } from './basket';
+
 export {
+    addProductIntoBasket,
+    removeProductIntoBasket,
+    editOwner,
+    initialBasket,
     fetchTopSalesLoading,
     fetchTopSalesSuccess,
     fetchTopSalesFailure,

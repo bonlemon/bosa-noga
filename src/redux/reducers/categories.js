@@ -1,4 +1,4 @@
-import { FETCH_CATEGORIES_LOADING, FETCH_CATEGORIES_SUCCESS, FETCH_CATEGORIES_FAILURE } from '../constants';
+import { fetchCategoriesFailure, fetchCategoriesLoading, fetchCategoriesSuccess } from '../actions';
 
 const INITIAL_STATE = {
     list: [],
@@ -8,7 +8,7 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case FETCH_CATEGORIES_LOADING: {
+        case fetchCategoriesLoading().type: {
             return {
                 ...state,
                 list: [],
@@ -16,7 +16,7 @@ export default (state = INITIAL_STATE, action) => {
                 error: null,
             };
         }
-        case FETCH_CATEGORIES_SUCCESS: {
+        case fetchCategoriesSuccess().type: {
             return {
                 ...state,
                 list: action.payload.list,
@@ -24,7 +24,7 @@ export default (state = INITIAL_STATE, action) => {
                 error: null,
             };
         }
-        case FETCH_CATEGORIES_FAILURE: {
+        case fetchCategoriesFailure().type: {
             return {
                 ...state,
                 list: [],

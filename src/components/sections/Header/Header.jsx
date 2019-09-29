@@ -4,7 +4,7 @@ import './Header.css';
 import { Links } from '../../core';
 import { SearchWidget } from '../../widgets';
 
-const Header = ({ amountInBasket, isVisible, onToggleForm }) => {
+const Header = ({ amountInBasket, isVisible, onToggleForm, onClickGoToBasket }) => {
     const links = [
         { key: nanoid(), title: 'Главная', href: '/' },
         { key: nanoid(), title: 'Каталог', href: '/catalog' },
@@ -33,9 +33,13 @@ const Header = ({ amountInBasket, isVisible, onToggleForm }) => {
                                         className='header-controls-pic header-controls-search'
                                     />
 
-                                    <div className='header-controls-pic header-controls-cart'>
+                                    <div
+                                        className='header-controls-pic header-controls-cart'
+                                        onClick={amountInBasket ? onClickGoToBasket : null}>
                                         {amountInBasket ? (
-                                            <div className='header-controls-cart-full'>{amountInBasket}</div>
+                                            <div className='header-controls-cart-full' onClick={onClickGoToBasket}>
+                                                {amountInBasket}
+                                            </div>
                                         ) : null}
                                         <div className='header-controls-cart-menu' />
                                     </div>

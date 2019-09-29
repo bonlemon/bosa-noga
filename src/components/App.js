@@ -3,19 +3,37 @@ import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 
 import { Header, Content, Footer } from './sections';
 import { MainContainer, Catalog, About, Contacts, Product, Basket, NotFound } from './pages';
-import { fetchCategoriesLoading } from '../redux/actions';
+import { fetchCategoriesLoading, initialBasket } from '../redux/actions';
 import { connect } from 'react-redux';
 import { getItemsErrors } from '../redux/reducers/items';
-import { getOrderError } from '../redux/reducers/basket';
+import { getBasketItems, getOrderError, getOwner } from '../redux/reducers/basket';
 import { getTopSalesErrors } from '../redux/reducers/topSales';
 import { getCategoriesError } from '../redux/reducers/categories';
 import Modal from './core/Modal';
 
 class App extends Component {
     componentDidMount() {
-        const { fetchCategories } = this.props;
+        const { onFetchCategories, onInitialBasket } = this.props;
 
-        fetchCategories();
+        onFetchCategories();
+
+        const basket = localStorage.getItem('BASKET');
+
+        if (basket) {
+            onInitialBasket(JSON.parse(basket));
+        }
+    }
+    componentDidUpdate(pP) {
+        const { basketItems } = this.props;
+
+        if (pP.basketItems.length !== basketItems.length) {
+            localStorage.setItem(
+                'BASKET',
+                JSON.stringify({
+                    list: basketItems,
+                })
+            );
+        }
     }
 
     render() {
@@ -49,16 +67,20 @@ function mapStateToProps(state) {
     const order = getOrderError(state);
     const topSales = getTopSalesErrors(state);
     const categories = getCategoriesError(state);
-    const getErrorMessage = (slices) => slices.some((slice) => slice && slice.error);
+
+    const getErrorMessage = (slices) => slices.find((slice) => slice);
 
     return {
+        owner: getOwner(state),
+        basketItems: getBasketItems(state),
         errorMessage: getErrorMessage([items, order, topSales, categories]),
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        fetchCategories: () => dispatch(fetchCategoriesLoading()),
+        onFetchCategories: () => dispatch(fetchCategoriesLoading()),
+        onInitialBasket: (payload) => dispatch(initialBasket(payload)),
     };
 }
 

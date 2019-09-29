@@ -4,66 +4,37 @@ import { fetchItemsLoading } from '../../../redux/actions';
 import Basket from './Basket';
 import { getItemsIsLoading, getSelectedProductById } from '../../../redux/reducers/items';
 import { Preloader } from '../../core';
+import { getBasketItems, getOrderLoading, getOwner } from '../../../redux/reducers/basket';
+import { editOwner, removeProductIntoBasket } from '../../../redux/actions/basket';
 
 class BasketContainer extends Component {
-    state = {
-        amount: 1,
-        selected: null,
+    handleOnRemove = (id) => () => {
+        this.props.onRemove({ id });
     };
-    componentDidMount() {
-        const {
-            fetchItems,
-            match: {
-                params: { id },
-            },
-        } = this.props;
-
-        fetchItems({ id });
-    }
-    handleOnChangeAmount = (operation) => () => {
-        this.setState(({ amount }) => {
-            if (operation === 'add') {
-                return { amount: amount + 1 };
-            } else {
-                if (amount === 0) {
-                    return { amount: 0 };
-                }
-                return { amount: amount - 1 };
-            }
-        });
-    };
-    handleOnChangeSelected = (seleced) => {
-        this.setState({ seleced });
-    };
-
-    handleOnGoInBasket = () => {
-        this.props.history.push(/)
+    handleOnEditOwner = (owner) => {
+        this.props.onEditOwner(owner);
     };
     render() {
-        const { isLoading, product } = this.props;
-        const { amount } = this.state;
-        return isLoading || !product ? (
+        const { isLoading, basketItems } = this.props;
+        return isLoading ? (
             <Preloader />
         ) : (
-            <Basket
-                amount={amount}
-                product={product}
-                onChangeSelected={this.handleOnChangeSelected}
-                onChangeAmount={this.handleOnChangeAmount}
-                onClickInBasket={this.handleOnGoInBasket}
-            />
+            <Basket items={basketItems} onRemove={this.handleOnRemove} onEditOwner={this.handleOnEditOwner} />
         );
     }
 }
 function mapStateToProps(state) {
     return {
-        isLoading: getItemsIsLoading(state),
-        product: getSelectedProductById(state),
+        owner: getOwner(state),
+        basketItems: getBasketItems(state),
+        isLoading: getOrderLoading(state),
     };
 }
 function mapDispatchToProps(dispatch) {
     return {
         fetchItems: (params) => dispatch(fetchItemsLoading(params)),
+        onRemove: (params) => dispatch(removeProductIntoBasket(params)),
+        onEditOwner: (params) => dispatch(editOwner(params)),
     };
 }
 

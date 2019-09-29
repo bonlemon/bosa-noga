@@ -116,12 +116,12 @@ section {
   margin-bottom: 2em;
 }
 .catalog-search-form .form-control {
-  width: 100%;
+  width: 100% !important;
   height: 100%;
   color: #333333;
   border: none;
-  outline: none;
-  box-shadow: none;
+  outline: none  !important;
+  box-shadow: none  !important;
 }
 
 /* Bootstrap */

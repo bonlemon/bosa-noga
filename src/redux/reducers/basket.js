@@ -4,7 +4,7 @@ import {
     EDIT_OWNER,
     ORDER_LOADING,
     ORDER_SUCCESS,
-    ORDER_FAILURE,
+    ORDER_FAILURE, INITIAL_BASKET,
 } from '../constants';
 
 const INITIAL_STATE = {
@@ -17,24 +17,30 @@ const INITIAL_STATE = {
     error: null,
 };
 
-export default (state = INITIAL_STATE, action) => {
-    switch (action.type) {
+export default (state = INITIAL_STATE, { type, payload }) => {
+    switch (type) {
+        case INITIAL_BASKET: {
+            return {
+                ...state,
+                list: [...payload.list],
+            };
+        }
         case ADD_ITEM_INTO_BASKET: {
             return {
                 ...state,
-                list: [...state.list, action.payload.item],
+                list: [...state.list, payload.product],
             };
         }
         case REMOVE_ITEM_INTO_BASKET: {
             return {
                 ...state,
-                list: [...state.list, action.payload.item],
+                list: [...state.list.filter((item) => item.id !== payload.id)],
             };
         }
         case EDIT_OWNER: {
             return {
                 ...state,
-                owner: { ...state.owner, [action.payload.key]: action.payload.value | null },
+                owner: { ...state.owner, [payload.key]: payload.value | null },
             };
         }
         case ORDER_LOADING: {
@@ -48,7 +54,7 @@ export default (state = INITIAL_STATE, action) => {
         case ORDER_SUCCESS: {
             return {
                 ...state,
-                list: action.payload.list,
+                list: payload.list,
                 isLoading: false,
                 error: null,
             };
@@ -58,7 +64,7 @@ export default (state = INITIAL_STATE, action) => {
                 ...state,
                 list: [],
                 isLoading: false,
-                error: action.payload.error,
+                error: payload.error,
             };
         }
         default:
