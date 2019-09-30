@@ -9,7 +9,15 @@ import {
     fetchMoreItemsFailure,
 } from './items';
 
-import { addProductIntoBasket, removeProductIntoBasket, editOwner, initialBasket } from './basket';
+import {
+    addProductIntoBasket,
+    removeProductIntoBasket,
+    editOwner,
+    initialBasket,
+    makeOrderFailure,
+    makeOrderLoading,
+    makeOrderSuccess,
+} from './basket';
 
 export {
     addProductIntoBasket,
@@ -28,4 +36,7 @@ export {
     fetchMoreItemsLoading,
     fetchMoreItemsSuccess,
     fetchMoreItemsFailure,
+    makeOrderFailure,
+    makeOrderLoading,
+    makeOrderSuccess,
 };

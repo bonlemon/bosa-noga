@@ -7,8 +7,8 @@ import { editOwner, makeOrderLoading, removeProductIntoBasket } from '../../../r
 
 class BasketContainer extends Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
-        const { history } = this.props;
-        if (prevProps.isLoading && prevProps.isSuccess) {
+        const { history, isSuccess } = this.props;
+        if (prevProps.isLoading && isSuccess) {
             localStorage.removeItem('BASKET');
             history.push('/');
         }
@@ -17,7 +17,6 @@ class BasketContainer extends Component {
         this.props.onRemove({ id });
     };
     handleOnEditOwner = (e) => {
-        console.error({ id: e.target.id, value: e.target.value });
         this.props.onEditOwner({ id: e.target.id, value: e.target.value });
     };
     handleOnSubmit = (e) => {

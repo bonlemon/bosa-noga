@@ -8,7 +8,6 @@ import {
     fetchMoreItemsLoading,
 } from '../actions';
 import { SERVER_URL } from '../constants';
-import { makeOrderFailure, makeOrderLoading, makeOrderSuccess } from '../actions/basket';
 
 function getUrl(payload) {
     let url = `${SERVER_URL}/items`;
@@ -57,24 +56,4 @@ function* fetchMoreItemsWorker({ payload }) {
 
 export function* watchFetchMoreItems() {
     yield takeEvery(fetchMoreItemsLoading().type, fetchMoreItemsWorker);
-}
-
-function* makeOrderWorker({ payload }) {
-    try {
-        const body = JSON.stringify({ ...payload });
-
-        const response = yield fetch(`${SERVER_URL}/order`, { method: 'POST', body });
-
-        if (response.ok) {
-            yield put(makeOrderSuccess());
-        }
-
-        throw new Error('Произошла ошибка при размещении заказа');
-    } catch (e) {
-        yield put(makeOrderFailure({ error: e.message }));
-    }
-}
-
-export function* watchMakeOrder() {
-    yield takeEvery(makeOrderLoading().type, makeOrderWorker);
 }

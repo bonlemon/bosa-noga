@@ -1,10 +1,9 @@
 import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Basket.css';
-import * as nanoid from 'nanoid';
+import nanoid from 'nanoid';
 
 const Items = ({ items, onRemove }) => {
-    console.log(items);
     return (
         <table className='table table-bordered'>
             <thead>

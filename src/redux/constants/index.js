@@ -12,9 +12,6 @@ export const FETCH_ITEMS = 'FETCH_ITEMS';
 export const FETCH_MORE_ITEMS = 'FETCH_MORE_ITEMS';
 export const MAKE_ORDER = 'MAKE_ORDER';
 export const FETCH_CATEGORIES = 'FETCH_CATEGORIES';
-export const ORDER_LOADING = 'ORDER_LOADING';
-export const ORDER_SUCCESS = 'ORDER_SUCCESS';
-export const ORDER_FAILURE = 'ORDER_FAILURE';
 
 // Common
 export const SERVER_URL = 'http://localhost:7070/api';

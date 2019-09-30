@@ -1,12 +1,5 @@
-import {
-    ADD_ITEM_INTO_BASKET,
-    REMOVE_ITEM_INTO_BASKET,
-    EDIT_OWNER,
-    ORDER_LOADING,
-    ORDER_SUCCESS,
-    ORDER_FAILURE,
-    INITIAL_BASKET,
-} from '../constants';
+import { ADD_ITEM_INTO_BASKET, REMOVE_ITEM_INTO_BASKET, EDIT_OWNER, INITIAL_BASKET } from '../constants';
+import { makeOrderFailure, makeOrderLoading, makeOrderSuccess } from '../actions';
 
 const INITIAL_STATE = {
     owner: {
@@ -47,7 +40,7 @@ export default (state = INITIAL_STATE, { type, payload }) => {
                 }),
             };
         }
-        case ORDER_LOADING: {
+        case makeOrderLoading().type: {
             return {
                 ...state,
                 isLoading: true,
@@ -55,7 +48,7 @@ export default (state = INITIAL_STATE, { type, payload }) => {
                 error: null,
             };
         }
-        case ORDER_SUCCESS: {
+        case makeOrderSuccess().type: {
             return {
                 ...state,
                 list: [],
@@ -64,7 +57,7 @@ export default (state = INITIAL_STATE, { type, payload }) => {
                 error: null,
             };
         }
-        case ORDER_FAILURE: {
+        case makeOrderFailure().type: {
             return {
                 ...state,
                 list: [],
