@@ -8,7 +8,7 @@ import {
     fetchMoreItemsLoading,
 } from '../actions';
 import { SERVER_URL } from '../constants';
-import { makeOrderFailure, makeOrderLoading, makeOrderSuccess } from '../actions/items';
+import { makeOrderFailure, makeOrderLoading, makeOrderSuccess } from '../actions/basket';
 
 function getUrl(payload) {
     let url = `${SERVER_URL}/items`;
@@ -64,6 +64,7 @@ function* makeOrderWorker({ payload }) {
         const { owner, items } = payload;
         const response = yield fetch(`${SERVER_URL}/order`, { method: 'POST', body: { owner, items } });
         const data = yield response.json();
+        console.log(data);
         yield put(makeOrderSuccess());
     } catch (e) {
         yield put(makeOrderFailure({ error: e.message }));

@@ -19,5 +19,3 @@ export const { fetchItemsLoading, fetchItemsSuccess, fetchItemsFailure } = creat
 export const { fetchMoreItemsLoading, fetchMoreItemsSuccess, fetchMoreItemsFailure } = createAsyncActions(
     FETCH_MORE_ITEMS
 );
-
-export const { makeOrderLoading, makeOrderSuccess, makeOrderFailure } = createAsyncActions(MAKE_ORDER);

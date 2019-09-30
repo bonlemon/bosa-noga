@@ -4,7 +4,8 @@ import {
     EDIT_OWNER,
     ORDER_LOADING,
     ORDER_SUCCESS,
-    ORDER_FAILURE, INITIAL_BASKET,
+    ORDER_FAILURE,
+    INITIAL_BASKET,
 } from '../constants';
 
 const INITIAL_STATE = {
@@ -13,6 +14,7 @@ const INITIAL_STATE = {
         address: null,
     },
     list: [],
+    isSuccess: false,
     isLoading: false,
     error: null,
 };
@@ -46,16 +48,17 @@ export default (state = INITIAL_STATE, { type, payload }) => {
         case ORDER_LOADING: {
             return {
                 ...state,
-                list: [],
                 isLoading: true,
+                isSuccess: false,
                 error: null,
             };
         }
         case ORDER_SUCCESS: {
             return {
                 ...state,
-                list: payload.list,
+                list: [],
                 isLoading: false,
+                isSuccess: true,
                 error: null,
             };
         }
@@ -64,6 +67,7 @@ export default (state = INITIAL_STATE, { type, payload }) => {
                 ...state,
                 list: [],
                 isLoading: false,
+                isSuccess: false,
                 error: payload.error,
             };
         }
@@ -75,4 +79,5 @@ export default (state = INITIAL_STATE, { type, payload }) => {
 export const getOwner = (state) => state.basket.owner;
 export const getBasketItems = (state) => state.basket.list;
 export const getOrderLoading = (state) => state.basket.isLoading;
+export const getOrderSuccess = (state) => state.basket.isSuccess;
 export const getOrderError = (state) => state.basket.error;

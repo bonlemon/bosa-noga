@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Basket.css';
 import * as nanoid from 'nanoid';
@@ -52,10 +52,14 @@ const Items = ({ items, onRemove }) => {
         </table>
     );
 };
-const Order = ({ onEditOwner }) => {
+const Order = ({ onEditOwner, onSubmit }) => {
+    const [isAgreeWithRules, setIsAgreeWithRules] = useState(false);
+    const onClick = () => {
+        setIsAgreeWithRules(!isAgreeWithRules);
+    };
     return (
         <div className='card owner'>
-            <form className='card-body'>
+            <form className='card-body' onSubmit={onSubmit}>
                 <div className='form-group'>
                     <label htmlFor='phone'>Телефон</label>
                     <input className='form-control' id='phone' placeholder='Ваш телефон' onChange={onEditOwner} />
@@ -65,19 +69,29 @@ const Order = ({ onEditOwner }) => {
                     <input className='form-control' id='address' placeholder='Адрес доставки' onChange={onEditOwner} />
                 </div>
                 <div className='form-group form-check'>
-                    <input type='checkbox' className='form-check-input' id='agreement' />
+                    <input
+                        type='checkbox'
+                        className='form-check-input'
+                        id='agreement'
+                        checked={isAgreeWithRules}
+                        onClick={onClick}
+                    />
                     <label className='form-check-label' htmlFor='agreement'>
                         Согласен с правилами доставки
                     </label>
                 </div>
-                <button type='submit' className='btn btn-outline-secondary'>
+                <button
+                    type='submit'
+                    className='btn btn-outline-secondary'
+                    onClick={onSubmit}
+                    disabled={!isAgreeWithRules}>
                     Оформить
                 </button>
             </form>
         </div>
     );
 };
-const Basket = ({ items, onRemove, onEditOwner }) => {
+const Basket = ({ items, onRemove, onEditOwner, onSubmit }) => {
     return (
         <Fragment>
             <section className='cart'>
@@ -86,7 +100,7 @@ const Basket = ({ items, onRemove, onEditOwner }) => {
             </section>
             <section className='order'>
                 <h2 className='text-center'> Оформить заказ </h2>
-                <Order onEditOwner={onEditOwner} />
+                <Order onEditOwner={onEditOwner} onSubmi={onSubmit} />
             </section>
         </Fragment>
     );
