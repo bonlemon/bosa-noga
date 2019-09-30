@@ -13,7 +13,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: auto;
+    padding-top: 70%;
     width: 100%;
 }
 .card-body {
