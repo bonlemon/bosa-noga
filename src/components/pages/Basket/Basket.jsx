@@ -70,11 +70,11 @@ const Order = ({ onEditOwner, onSubmit }) => {
                 </div>
                 <div className='form-group form-check'>
                     <input
+                        id='agreement'
                         type='checkbox'
                         className='form-check-input'
-                        id='agreement'
                         checked={isAgreeWithRules}
-                        onClick={onClick}
+                        onChange={onClick}
                     />
                     <label className='form-check-label' htmlFor='agreement'>
                         Согласен с правилами доставки
@@ -100,7 +100,7 @@ const Basket = ({ items, onRemove, onEditOwner, onSubmit }) => {
             </section>
             <section className='order'>
                 <h2 className='text-center'> Оформить заказ </h2>
-                <Order onEditOwner={onEditOwner} onSubmi={onSubmit} />
+                <Order onEditOwner={onEditOwner} onSubmit={onSubmit} />
             </section>
         </Fragment>
     );

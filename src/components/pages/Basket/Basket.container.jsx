@@ -1,25 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchItemsLoading } from '../../../redux/actions';
 import Basket from './Basket';
-import { getItemsIsLoading, getSelectedProductById } from '../../../redux/reducers/items';
 import { Preloader } from '../../core';
 import { getBasketItems, getOrderLoading, getOrderSuccess, getOwner } from '../../../redux/reducers/basket';
 import { editOwner, makeOrderLoading, removeProductIntoBasket } from '../../../redux/actions/basket';
 
 class BasketContainer extends Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
+        const { history } = this.props;
         if (prevProps.isLoading && prevProps.isSuccess) {
             localStorage.removeItem('BASKET');
+            history.push('/');
         }
     }
     handleOnRemove = (id) => () => {
         this.props.onRemove({ id });
     };
     handleOnEditOwner = (e) => {
+        console.error({ id: e.target.id, value: e.target.value });
         this.props.onEditOwner({ id: e.target.id, value: e.target.value });
     };
-    handleOnSubmit = () => {
+    handleOnSubmit = (e) => {
+        e.preventDefault();
         const { owner, basketItems, onMakeOrderLoading } = this.props;
         const items = basketItems.map(({ id, price, amount }) => ({ id, price, count: amount }));
         onMakeOrderLoading({ owner, items });

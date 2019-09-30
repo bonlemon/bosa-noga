@@ -42,7 +42,9 @@ export default (state = INITIAL_STATE, { type, payload }) => {
         case EDIT_OWNER: {
             return {
                 ...state,
-                owner: { ...state.owner, [payload.key]: payload.value | null },
+                owner: Object.assign({}, state.owner, {
+                    [payload.id]: payload.value,
+                }),
             };
         }
         case ORDER_LOADING: {

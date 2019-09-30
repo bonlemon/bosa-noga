@@ -1,4 +1,4 @@
-import { FETCH_ITEMS, FETCH_MORE_ITEMS, CHANGE_QUERY_TEXT, MAKE_ORDER } from '../constants';
+import { FETCH_ITEMS, FETCH_MORE_ITEMS, CHANGE_QUERY_TEXT } from '../constants';
 import { createAsyncActions } from './helpers';
 
 // Sync

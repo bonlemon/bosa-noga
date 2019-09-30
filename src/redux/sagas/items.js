@@ -61,11 +61,15 @@ export function* watchFetchMoreItems() {
 
 function* makeOrderWorker({ payload }) {
     try {
-        const { owner, items } = payload;
-        const response = yield fetch(`${SERVER_URL}/order`, { method: 'POST', body: { owner, items } });
-        const data = yield response.json();
-        console.log(data);
-        yield put(makeOrderSuccess());
+        const body = JSON.stringify({ ...payload });
+
+        const response = yield fetch(`${SERVER_URL}/order`, { method: 'POST', body });
+
+        if (response.ok) {
+            yield put(makeOrderSuccess());
+        }
+
+        throw new Error('Произошла ошибка при размещении заказа');
     } catch (e) {
         yield put(makeOrderFailure({ error: e.message }));
     }
