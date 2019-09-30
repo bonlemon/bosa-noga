@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Basket.css';
 import nanoid from 'nanoid';
+import Modal from '../../core/Modal';
 
 const Items = ({ items, onRemove }) => {
     return (
@@ -90,7 +91,7 @@ const Order = ({ onEditOwner, onSubmit }) => {
         </div>
     );
 };
-const Basket = ({ items, onRemove, onEditOwner, onSubmit }) => {
+const Basket = ({ items, isSuccess, onClose, onRemove, onEditOwner, onSubmit }) => {
     return (
         <Fragment>
             <section className='cart'>
@@ -101,6 +102,9 @@ const Basket = ({ items, onRemove, onEditOwner, onSubmit }) => {
                 <h2 className='text-center'> Оформить заказ </h2>
                 <Order onEditOwner={onEditOwner} onSubmit={onSubmit} />
             </section>
+            <Modal isOpened={isSuccess} onClose={onClose}>
+                Заказ успешно отправлен
+            </Modal>
         </Fragment>
     );
 };

@@ -10,8 +10,12 @@ import { getBasketItems, getOrderError, getOwner } from '../redux/reducers/baske
 import { getTopSalesErrors } from '../redux/reducers/topSales';
 import { getCategoriesError } from '../redux/reducers/categories';
 import Modal from './core/Modal';
+import { resetErrors } from '../redux/actions/common';
 
 class App extends Component {
+    state = {
+        isOpened: false,
+    };
     componentDidMount() {
         const { onFetchCategories, onInitialBasket } = this.props;
 
@@ -24,7 +28,7 @@ class App extends Component {
         }
     }
     componentDidUpdate(pP) {
-        const { basketItems } = this.props;
+        const { basketItems, errorMessage } = this.props;
 
         if (pP.basketItems.length !== basketItems.length) {
             localStorage.setItem(
@@ -34,10 +38,20 @@ class App extends Component {
                 })
             );
         }
+
+        if (pP.errorMessage !== errorMessage && errorMessage) {
+            this.setState({ isOpened: true });
+        }
     }
+
+    handlerOnClose = () => {
+        this.setState({ isOpened: false }, this.props.onResetErrors);
+    };
 
     render() {
         const { errorMessage } = this.props;
+        const { isOpened } = this.state;
+
         return (
             <div className='App'>
                 <BrowserRouter>
@@ -55,7 +69,9 @@ class App extends Component {
                         </Switch>
                     </Content>
                     <Footer />
-                    {errorMessage && <Modal errorMessage={errorMessage} />}
+                    <Modal isOpened={isOpened} onClose={this.handlerOnClose}>
+                        {errorMessage}
+                    </Modal>
                 </BrowserRouter>
             </div>
         );
@@ -81,6 +97,7 @@ function mapDispatchToProps(dispatch) {
     return {
         onFetchCategories: () => dispatch(fetchCategoriesLoading()),
         onInitialBasket: (payload) => dispatch(initialBasket(payload)),
+        onResetErrors: () => dispatch(resetErrors()),
     };
 }
 

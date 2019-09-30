@@ -3,16 +3,15 @@ import { connect } from 'react-redux';
 import Basket from './Basket';
 import { Preloader } from '../../core';
 import { getBasketItems, getOrderLoading, getOrderSuccess, getOwner } from '../../../redux/reducers/basket';
-import { editOwner, makeOrderLoading, removeProductIntoBasket } from '../../../redux/actions/basket';
+import { editOwner, makeOrderLoading, removeProductIntoBasket, resetBasket } from '../../../redux/actions/basket';
 
 class BasketContainer extends Component {
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        const { history, isSuccess } = this.props;
-        if (prevProps.isLoading && isSuccess) {
-            localStorage.removeItem('BASKET');
-            history.push('/');
-        }
-    }
+    handlerOnClose = () => {
+        const { history, onResetBasket } = this.props;
+        localStorage.removeItem('BASKET');
+        onResetBasket();
+        history.push('/');
+    };
     handleOnRemove = (id) => () => {
         this.props.onRemove({ id });
     };
@@ -26,12 +25,14 @@ class BasketContainer extends Component {
         onMakeOrderLoading({ owner, items });
     };
     render() {
-        const { isLoading, basketItems } = this.props;
+        const { isLoading, isSuccess, basketItems } = this.props;
         return isLoading ? (
             <Preloader />
         ) : (
             <Basket
                 items={basketItems}
+                isSuccess={isSuccess}
+                onClose={this.handlerOnClose}
                 onRemove={this.handleOnRemove}
                 onEditOwner={this.handleOnEditOwner}
                 onSubmit={this.handleOnSubmit}
@@ -52,6 +53,7 @@ function mapDispatchToProps(dispatch) {
         onRemove: (params) => dispatch(removeProductIntoBasket(params)),
         onEditOwner: (params) => dispatch(editOwner(params)),
         onMakeOrderLoading: (params) => dispatch(makeOrderLoading(params)),
+        onResetBasket: (params) => dispatch(resetBasket(params)),
     };
 }
 

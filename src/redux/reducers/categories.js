@@ -1,4 +1,5 @@
 import { fetchCategoriesFailure, fetchCategoriesLoading, fetchCategoriesSuccess } from '../actions';
+import { RESET_ERRORS } from '../constants';
 
 const INITIAL_STATE = {
     list: [],
@@ -30,6 +31,12 @@ export default (state = INITIAL_STATE, action) => {
                 list: [],
                 isLoading: false,
                 error: action.payload.error,
+            };
+        }
+        case RESET_ERRORS: {
+            return {
+                ...state,
+                error: null,
             };
         }
         default:

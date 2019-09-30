@@ -1,4 +1,11 @@
-import { ADD_ITEM_INTO_BASKET, REMOVE_ITEM_INTO_BASKET, EDIT_OWNER, INITIAL_BASKET } from '../constants';
+import {
+    ADD_ITEM_INTO_BASKET,
+    REMOVE_ITEM_INTO_BASKET,
+    EDIT_OWNER,
+    INITIAL_BASKET,
+    RESET_ERRORS,
+    RESET_BASKET,
+} from '../constants';
 import { makeOrderFailure, makeOrderLoading, makeOrderSuccess } from '../actions';
 
 const INITIAL_STATE = {
@@ -66,6 +73,18 @@ export default (state = INITIAL_STATE, { type, payload }) => {
                 error: payload.error,
             };
         }
+        case RESET_ERRORS: {
+            return {
+                ...state,
+                error: null,
+            };
+        }
+        case RESET_BASKET: {
+            return {
+                ...INITIAL_STATE,
+            };
+        }
+
         default:
             return state;
     }

@@ -1,4 +1,4 @@
-import { CHANGE_QUERY_TEXT } from '../constants';
+import { CHANGE_QUERY_TEXT, RESET_ERRORS } from '../constants';
 import {
     fetchItemsFailure,
     fetchItemsLoading,
@@ -72,6 +72,13 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 queryText: action.payload.queryText,
+            };
+        }
+
+        case RESET_ERRORS: {
+            return {
+                ...state,
+                error: null,
             };
         }
 
