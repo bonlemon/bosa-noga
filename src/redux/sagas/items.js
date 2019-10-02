@@ -12,7 +12,7 @@ import { apiService } from '../../utils';
 function* fetchItemsWorker({ payload }) {
     try {
         const url = apiService.getQueryString(payload);
-        const data = yield apiService.fetchItems({ queryString: url });
+        const {data} = yield apiService.fetchItems({ queryString: url });
 
         const list = Array.isArray(data) ? data : [];
         const byId = Array.isArray(data) ? null : data;

@@ -1,14 +1,13 @@
 import { takeEvery, put } from 'redux-saga/effects';
 import { SERVER_URL } from '../constants';
 import { makeOrderFailure, makeOrderLoading, makeOrderSuccess } from '../actions/basket';
+import { apiService } from '../../utils';
 
 function* makeOrderWorker({ payload }) {
     try {
-        const body = JSON.stringify({ ...payload });
+        const { status } = yield apiService.makeOrder({ body: JSON.stringify({ ...payload }) });
 
-        const response = yield fetch(`${SERVER_URL}/order`, { method: 'POST', body });
-
-        if (response.status === 204) {
+        if (status === 204) {
             yield put(makeOrderSuccess());
         } else {
             throw new Error('Произошла ошибка при размещении заказа');

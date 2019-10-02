@@ -5,7 +5,7 @@ import { apiService } from '../../utils';
 
 function* fetchTopSales() {
     try {
-        const data = yield apiService.fetchTopSales();
+        const { data } = yield apiService.fetchTopSales();
         yield put(fetchTopSalesSuccess(data));
     } catch (e) {
         yield put(fetchTopSalesFailure(e.message));

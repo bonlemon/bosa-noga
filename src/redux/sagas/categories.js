@@ -4,7 +4,7 @@ import { apiService } from '../../utils';
 
 function* fetchCategories() {
     try {
-        const data = yield apiService.fetchCategories();
+        const {data} = yield apiService.fetchCategories();
 
         yield put(fetchCategoriesSuccess({ list: [{ id: 0, title: 'Все' }, ...data] }));
     } catch (e) {

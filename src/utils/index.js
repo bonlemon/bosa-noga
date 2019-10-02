@@ -12,17 +12,21 @@ const getAdiService = () => {
 
     async function sentRequest(url, body) {
         const response = await fetch(`${serverUrl}/${url}`, body);
+        const data = await response.json();
 
-        return await response.json();
+        return {
+            status: response.status,
+            data,
+        };
     }
 
     return {
         fetchTopSales: () => sentRequest('top-sales'),
         fetchCategories: () => sentRequest('categories'),
-        fetchItems: ({ queryString }) => sentRequest(`items/${queryString}`),
+        fetchItems: ({ queryString }) => sentRequest(`items${queryString}`),
+        makeOrder: ({ body }) => sentRequest(`order`, { method: 'POST', body }),
         getQueryString(payload) {
-            let url = `${SERVER_URL}/items`;
-
+            let url = '';
             if (payload.id) {
                 return `${url}/${payload.id}`;
             }
@@ -34,7 +38,7 @@ const getAdiService = () => {
                 });
             }
             return url;
-        }
+        },
     };
 };
 
