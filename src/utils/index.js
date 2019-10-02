@@ -1,5 +1,3 @@
-import { SERVER_URL } from '../redux/constants';
-
 export const toCamelCase = (type) => {
     return type
         .split('_')
