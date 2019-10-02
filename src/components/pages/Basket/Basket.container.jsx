@@ -21,7 +21,7 @@ class BasketContainer extends Component {
     handleOnSubmit = (e) => {
         e.preventDefault();
         const { owner, basketItems, onMakeOrderLoading } = this.props;
-        const items = basketItems.map(({ id, price, amount }) => ({ id, price, count: amount }));
+        const items = basketItems.map(({ id, price, count }) => ({ id, price, count }));
         onMakeOrderLoading({ owner, items });
     };
     render() {

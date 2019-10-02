@@ -19,16 +19,16 @@ const Items = ({ items, onRemove }) => {
                 </tr>
             </thead>
             <tbody>
-                {items.map(({ id, title, size, amount, price, result }, index) => (
+                {items.map(({ id, title, size, count, price, result }, index) => (
                     <tr key={nanoid()}>
                         <th scope='row'>{index + 1}</th>
                         <td>
                             <Link to={`/products/${id}`}>{title}</Link>
                         </td>
                         <td>{size}</td>
-                        <td>{amount}</td>
+                        <td>{count}</td>
                         <td>{price} руб.</td>
-                        <td>{price * amount} руб.</td>
+                        <td>{price * count} руб.</td>
                         <td>
                             <button className='btn btn-outline-danger btn-sm' onClick={onRemove(id)}>
                                 Удалить
@@ -42,8 +42,8 @@ const Items = ({ items, onRemove }) => {
                         Общая стоимость
                     </td>
                     <td>
-                        {items.reduce((acc, { price, amount }) => {
-                            return acc + price * amount;
+                        {items.reduce((acc, { price, count }) => {
+                            return acc + price * count;
                         }, 0)}
                         руб.
                     </td>

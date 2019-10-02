@@ -9,7 +9,7 @@ import { addProductIntoBasket } from '../../../redux/actions/basket';
 
 class ProductContainer extends Component {
     state = {
-        amount: 1,
+        count: 1,
         selected: null,
     };
     componentDidMount() {
@@ -23,11 +23,11 @@ class ProductContainer extends Component {
         onFetchItems({ id });
     }
     handleOnChangeAmount = (operation) => () => {
-        this.setState(({ amount }) => {
+        this.setState(({ count }) => {
             if (operation === 'add') {
-                return { amount: Number(amount) + 1 };
+                return { count: Number(count) + 1 };
             } else {
-                return { amount: Number(amount) - 1 };
+                return { count: Number(count) - 1 };
             }
         });
     };
@@ -37,17 +37,17 @@ class ProductContainer extends Component {
 
     handleOnGoInBasket = () => {
         const { history, product, onAddProductIntoBasket } = this.props;
-        const { amount } = this.state;
+        const { count } = this.state;
 
-        onAddProductIntoBasket({ product: { ...product, amount } });
+        onAddProductIntoBasket({ product: { ...product, count } });
         history.push('/basket');
     };
     render() {
         const { product } = this.props;
-        const { amount, selected } = this.state;
+        const { count, selected } = this.state;
         return !product ? null : (
             <Product
-                amount={amount}
+                count={count}
                 selected={selected}
                 product={product}
                 onChangeSelected={this.handleOnChangeSelected}

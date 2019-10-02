@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-const Product = ({ product, selected, amount, onClickInBasket, onChangeAmount, onChangeSelected }) => {
+const Product = ({ product, selected, count, onClickInBasket, onChangeAmount, onChangeSelected }) => {
     const { title, images, sku, color, manufacturer, sizes, material, season, reason } = product;
 
     const getSizeClassName = (size) => classNames('catalog-item-size', { selected: size === selected });
@@ -63,14 +63,14 @@ const Product = ({ product, selected, amount, onClickInBasket, onChangeAmount, o
                                 <button
                                     className='btn btn-secondary'
                                     onClick={onChangeAmount()}
-                                    disabled={Number(amount) === 1}>
+                                    disabled={Number(count) === 1}>
                                     -
                                 </button>
-                                <span className='btn btn-outline-primary'>{amount}</span>
+                                <span className='btn btn-outline-primary'>{count}</span>
                                 <button
                                     className='btn btn-secondary'
                                     onClick={onChangeAmount('add')}
-                                    disabled={Number(amount) === 10}>
+                                    disabled={Number(count) === 10}>
                                     +
                                 </button>
                             </span>
