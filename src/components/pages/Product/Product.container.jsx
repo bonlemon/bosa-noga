@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchItemsLoading } from '../../../redux/actions';
 import Product from './Product';
-import { getItemsIsLoading, getSelectedProductById } from '../../../redux/reducers/items';
-import { Preloader } from '../../core';
+// import { getItemsIsLoading, getSelectedProductById } from '../../../redux/reducers/items';
+import { getSelectedProductById } from '../../../redux/reducers/items';
+// import { Preloader } from '../../core';
 import { addProductIntoBasket } from '../../../redux/actions/basket';
 
 class ProductContainer extends Component {
@@ -42,11 +43,9 @@ class ProductContainer extends Component {
         history.push('/basket');
     };
     render() {
-        const { isLoading, product } = this.props;
+        const { product } = this.props;
         const { amount, selected } = this.state;
-        return isLoading || !product ? (
-            <Preloader />
-        ) : (
+        return !product ? null : (
             <Product
                 amount={amount}
                 selected={selected}
@@ -60,7 +59,7 @@ class ProductContainer extends Component {
 }
 function mapStateToProps(state) {
     return {
-        isLoading: getItemsIsLoading(state),
+        // isLoading: getItemsIsLoading(state),
         product: getSelectedProductById(state),
     };
 }

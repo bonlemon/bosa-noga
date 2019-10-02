@@ -13,7 +13,7 @@ class TopSalesContainer extends Component {
     }
     render() {
         const { isLoading, items } = this.props;
-        return isLoading ? <Preloader /> : <TopSales items={items} />;
+        return isLoading ? <Preloader /> : items.length ? <TopSales items={items} /> : null;
     }
 }
 function mapStateToProps(state) {

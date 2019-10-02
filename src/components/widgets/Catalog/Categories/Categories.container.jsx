@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Categories from './Categories';
-import Preloader from '../../../core/Preloader';
-import { categoriesIsLoadingSelector, categoriesSelector } from '../../../../redux/reducers/categories';
+// import Preloader from '../../../core/Preloader';
+// import { categoriesIsLoadingSelector, categoriesSelector } from '../../../../redux/reducers/categories';
+import { categoriesSelector } from '../../../../redux/reducers/categories';
 import { fetchItemsLoading } from '../../../../redux/actions';
 import { getSelectedCategoryId } from '../../../../redux/reducers/items';
 
@@ -12,10 +13,14 @@ class CategoriesContainer extends Component {
     };
 
     render() {
-        const { isLoading, categories, categoryId } = this.props;
-        return isLoading ? (
-            <Preloader />
-        ) : (
+        // const { isLoading, categories, categoryId } = this.props;
+        // return isLoading ? (
+        //     <Preloader />
+        // ) : (
+        //     <Categories categoryId={categoryId} categories={categories} onClickCategory={this.handleOnClickCategory} />
+        // );
+        const { categories, categoryId } = this.props;
+        return (
             <Categories categoryId={categoryId} categories={categories} onClickCategory={this.handleOnClickCategory} />
         );
     }
@@ -24,7 +29,7 @@ function mapStateToProps(state) {
     return {
         categories: categoriesSelector(state),
         categoryId: getSelectedCategoryId(state),
-        isLoading: categoriesIsLoadingSelector(state),
+        // isLoading: categoriesIsLoadingSelector(state),
     };
 }
 function mapDispatchToProps(dispatch) {

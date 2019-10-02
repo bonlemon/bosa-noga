@@ -8,6 +8,20 @@ import rootReducer from './redux/reducers';
 
 const sagaMiddleware = createSagaMiddleware();
 
-export default createStore(rootReducer, composeWithDevTools(applyMiddleware(logger, sagaMiddleware)));
+let middleware = [sagaMiddleware];
+
+// Add redux logger if node env is not production
+if (process.env.NODE_ENV !== 'production') {
+    middleware = [logger, ...middleware];
+}
+
+let enhancer = applyMiddleware(...middleware);
+
+// Add redux dev tools if node env is not production
+if (process.env.NODE_ENV !== 'production') {
+    enhancer = composeWithDevTools(enhancer);
+}
+
+export default createStore(rootReducer, enhancer);
 
 sagaMiddleware.run(rootSaga);
