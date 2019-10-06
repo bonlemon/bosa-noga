@@ -3,7 +3,7 @@ import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 
 import { Header, Content, Footer } from './sections';
 import { MainContainer, Catalog, About, Contacts, Product, Basket, NotFound } from './pages';
-import { fetchCategoriesLoading, initialBasket } from '../redux/actions';
+import { fetchCategoriesLoading } from '../redux/actions';
 import { connect } from 'react-redux';
 import { getItemsErrors } from '../redux/reducers/items';
 import { getBasketItems, getOrderError, getOwner } from '../redux/reducers/basket';
@@ -17,28 +17,12 @@ class App extends Component {
         isOpened: false,
     };
     componentDidMount() {
-        const { onFetchCategories, onInitialBasket } = this.props;
+        const { onFetchCategories } = this.props;
 
         onFetchCategories();
-
-        // const basket = localStorage.getItem('BASKET');
-
-        // if (basket) {
-        //     onInitialBasket(JSON.parse(basket));
-        // }
     }
     componentDidUpdate(pP) {
-        const { basketItems, errorMessage } = this.props;
-
-        // if (pP.basketItems.length !== basketItems.length) {
-        //     localStorage.setItem(
-        //         'BASKET',
-        //         JSON.stringify({
-        //             list: basketItems,
-        //         })
-        //     );
-        // }
-
+        const { errorMessage } = this.props;
         if (pP.errorMessage !== errorMessage && errorMessage) {
             this.setState({ isOpened: true });
         }
@@ -96,7 +80,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         onFetchCategories: () => dispatch(fetchCategoriesLoading()),
-        onInitialBasket: (payload) => dispatch(initialBasket(payload)),
         onResetErrors: () => dispatch(resetErrors()),
     };
 }

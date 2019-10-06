@@ -1,16 +1,9 @@
 import { FETCH_ITEMS, FETCH_MORE_ITEMS, CHANGE_QUERY_TEXT } from '../constants';
-import { createAsyncActions } from './helpers';
+import { createAsyncActions, getActionCreator } from './helpers';
 
 // Sync
 
-export const changeQueryText = ({ queryText }) => {
-    return {
-        type: CHANGE_QUERY_TEXT,
-        payload: {
-            queryText,
-        },
-    };
-};
+export const changeQueryText = getActionCreator(CHANGE_QUERY_TEXT);
 
 // Async
 

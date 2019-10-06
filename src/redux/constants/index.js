@@ -6,15 +6,12 @@ export {
     RESET_ERRORS,
     EDIT_OWNER,
     CHANGE_QUERY_TEXT,
-    FETCH_TOP_SALES_LOADING,
-    FETCH_TOP_SALES_SUCCESS,
-    FETCH_TOP_SALES_FAILURE,
     FETCH_ITEMS,
     FETCH_MORE_ITEMS,
     MAKE_ORDER,
+    FETCH_TOP_SALES,
+    FETCH_CATEGORIES,
 } from './types';
-
-export const FETCH_CATEGORIES = 'FETCH_CATEGORIES';
 
 // Common
 export const SERVER_URL = 'http://localhost:7070/api';

@@ -10,12 +10,17 @@ const getAdiService = () => {
 
     async function sentRequest(url, body) {
         const response = await fetch(`${serverUrl}/${url}`, body);
-        const data = await response.json();
+        try {
+            const data = await response.json();
 
-        return {
-            status: response.status,
-            data,
-        };
+            return {
+                data,
+            };
+        } catch (error) {
+            return {
+                status: response.status,
+            };
+        }
     }
 
     return {

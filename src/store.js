@@ -27,7 +27,6 @@ if (process.env.NODE_ENV !== 'production') {
 
 const persistedState = loadState();
 
-console.log('persistedState, ', persistedState)
 const store = createStore(rootReducer, persistedState, enhancer);
 
 store.subscribe(

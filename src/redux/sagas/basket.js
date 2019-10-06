@@ -1,5 +1,4 @@
 import { takeEvery, put } from 'redux-saga/effects';
-import { SERVER_URL } from '../constants';
 import { makeOrderFailure, makeOrderLoading, makeOrderSuccess } from '../actions/basket';
 import { apiService } from '../../utils';
 

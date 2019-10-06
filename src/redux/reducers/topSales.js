@@ -1,4 +1,5 @@
-import { FETCH_TOP_SALES_LOADING, FETCH_TOP_SALES_SUCCESS, FETCH_TOP_SALES_FAILURE, RESET_ERRORS } from '../constants';
+import { RESET_ERRORS } from '../constants';
+import { fetchTopSalesFailure, fetchTopSalesLoading, fetchTopSalesSuccess } from '../actions';
 
 const INITIAL_STATE = {
     list: [],
@@ -8,7 +9,7 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case FETCH_TOP_SALES_LOADING: {
+        case fetchTopSalesLoading().type: {
             return {
                 ...state,
                 list: [],
@@ -16,7 +17,7 @@ export default (state = INITIAL_STATE, action) => {
                 error: null,
             };
         }
-        case FETCH_TOP_SALES_SUCCESS: {
+        case fetchTopSalesSuccess().type: {
             return {
                 ...state,
                 list: action.payload.list,
@@ -24,7 +25,7 @@ export default (state = INITIAL_STATE, action) => {
                 error: null,
             };
         }
-        case FETCH_TOP_SALES_FAILURE: {
+        case fetchTopSalesFailure().type: {
             return {
                 ...state,
                 list: [],
