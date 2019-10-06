@@ -6,6 +6,9 @@ import logger from 'redux-logger';
 import rootSaga from './redux/sagas';
 import rootReducer from './redux/reducers';
 
+import { loadState, saveState } from './localStorage';
+import { throttle } from './utils';
+
 const sagaMiddleware = createSagaMiddleware();
 
 let middleware = [sagaMiddleware];
@@ -22,6 +25,18 @@ if (process.env.NODE_ENV !== 'production') {
     enhancer = composeWithDevTools(enhancer);
 }
 
-export default createStore(rootReducer, enhancer);
+const persistedState = loadState();
+
+console.log('persistedState, ', persistedState)
+const store = createStore(rootReducer, persistedState, enhancer);
+
+store.subscribe(
+    throttle(() => {
+        const state = store.getState();
+        saveState({ basket: state.basket });
+    }, 1000)
+);
+
+export default store;
 
 sagaMiddleware.run(rootSaga);

@@ -8,7 +8,7 @@ import { editOwner, makeOrderLoading, removeProductIntoBasket, resetBasket } fro
 class BasketContainer extends Component {
     handlerOnClose = () => {
         const { history, onResetBasket } = this.props;
-        localStorage.removeItem('BASKET');
+        // localStorage.removeItem('BASKET');
         onResetBasket();
         history.push('/');
     };
@@ -25,12 +25,13 @@ class BasketContainer extends Component {
         onMakeOrderLoading({ owner, items });
     };
     render() {
-        const { isLoading, isSuccess, basketItems } = this.props;
+        const { owner, isLoading, isSuccess, basketItems } = this.props;
         return isLoading ? (
             <Preloader />
         ) : (
             <Basket
                 items={basketItems}
+                owner={owner}
                 isSuccess={isSuccess}
                 onClose={this.handlerOnClose}
                 onRemove={this.handleOnRemove}

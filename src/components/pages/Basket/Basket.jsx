@@ -52,7 +52,7 @@ const Items = ({ items, onRemove }) => {
         </table>
     );
 };
-const Order = ({ onEditOwner, onSubmit }) => {
+const Order = ({ phone, address, onEditOwner, onSubmit }) => {
     const [isAgreeWithRules, setIsAgreeWithRules] = useState(false);
     const onClick = () => {
         setIsAgreeWithRules(!isAgreeWithRules);
@@ -62,11 +62,23 @@ const Order = ({ onEditOwner, onSubmit }) => {
             <form className='card-body' onSubmit={onSubmit}>
                 <div className='form-group'>
                     <label htmlFor='phone'>Телефон</label>
-                    <input className='form-control' id='phone' placeholder='Ваш телефон' onChange={onEditOwner} />
+                    <input
+                        className='form-control'
+                        id='phone'
+                        value={phone}
+                        placeholder='Ваш телефон'
+                        onChange={onEditOwner}
+                    />
                 </div>
                 <div className='form-group'>
                     <label htmlFor='address'>Адрес доставки</label>
-                    <input className='form-control' id='address' placeholder='Адрес доставки' onChange={onEditOwner} />
+                    <input
+                        className='form-control'
+                        id='address'
+                        value={address}
+                        placeholder='Адрес доставки'
+                        onChange={onEditOwner}
+                    />
                 </div>
                 <div className='form-group form-check'>
                     <input
@@ -91,7 +103,7 @@ const Order = ({ onEditOwner, onSubmit }) => {
         </div>
     );
 };
-const Basket = ({ items, isSuccess, onClose, onRemove, onEditOwner, onSubmit }) => {
+const Basket = ({ items, owner, isSuccess, onClose, onRemove, onEditOwner, onSubmit }) => {
     return (
         <Fragment>
             <section className='cart'>
@@ -100,7 +112,7 @@ const Basket = ({ items, isSuccess, onClose, onRemove, onEditOwner, onSubmit }) 
             </section>
             <section className='order'>
                 <h2 className='text-center'> Оформить заказ </h2>
-                <Order onEditOwner={onEditOwner} onSubmit={onSubmit} />
+                <Order {...owner} onEditOwner={onEditOwner} onSubmit={onSubmit} />
             </section>
             <Modal isOpened={isSuccess} onClose={onClose}>
                 Заказ успешно отправлен

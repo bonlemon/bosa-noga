@@ -21,23 +21,23 @@ class App extends Component {
 
         onFetchCategories();
 
-        const basket = localStorage.getItem('BASKET');
+        // const basket = localStorage.getItem('BASKET');
 
-        if (basket) {
-            onInitialBasket(JSON.parse(basket));
-        }
+        // if (basket) {
+        //     onInitialBasket(JSON.parse(basket));
+        // }
     }
     componentDidUpdate(pP) {
         const { basketItems, errorMessage } = this.props;
 
-        if (pP.basketItems.length !== basketItems.length) {
-            localStorage.setItem(
-                'BASKET',
-                JSON.stringify({
-                    list: basketItems,
-                })
-            );
-        }
+        // if (pP.basketItems.length !== basketItems.length) {
+        //     localStorage.setItem(
+        //         'BASKET',
+        //         JSON.stringify({
+        //             list: basketItems,
+        //         })
+        //     );
+        // }
 
         if (pP.errorMessage !== errorMessage && errorMessage) {
             this.setState({ isOpened: true });

@@ -67,7 +67,6 @@ export default (state = INITIAL_STATE, { type, payload }) => {
         case makeOrderFailure().type: {
             return {
                 ...state,
-                list: [],
                 isLoading: false,
                 isSuccess: false,
                 error: payload.error,
